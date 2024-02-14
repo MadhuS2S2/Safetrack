@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<body>
+    <table border='1'>
+        {% csrf_token %}
+        <tr>
+            <td>SI NO</td>
+            <td>Name</td>
+            <td>Age</td>
+            <td>Gender</td>
+            <td>Admit Date</td>
+            <td>Discharge Date</td>
+            <td>Status</td>
+            <td>Medicine</td>
+            <td>Food</td>
+            <td>Action</td>
+        </tr>
+        {%for i in patient%}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.patient_name}}</td>
+            <td>{{i.patient_age}}</td>
+            <td>{{i.patient_gender}}</td>
+            <td>{{i.patient_admitdate}}</td>
+            <td>{{i.patient_dischargedate}}</td>
+            <td>{{i.patient_vstatus}}</td>
+            <td><a href="{% url 'Healthcenter:medicinerequest' %}">Request</a></td>
+            <td><a href="#">Request</a></td>
+            <td><a href="{% url 'Healthcenter:deletepatient' i.id %}">Delete</a></td>
+        </tr>{%endfor%}
+    </table>
+</body>
+</html>

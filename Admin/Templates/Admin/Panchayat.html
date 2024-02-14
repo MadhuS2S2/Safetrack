@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panchayat</title>
+</head>
+<body>
+    <form action="" method="post" enctype="multipart/form-data" >
+        {% csrf_token %}
+        <select name="dropdown" id="">
+            <option value="" >--District--</option>
+            {% for i in district%}
+            <option value="{{i.id}}">{{i.district_name}}</option>
+            {%endfor%}
+        </select><br><br>
+        
+        <input placeholder="panchayat" type="text" name="panchayat"><br><br>
+        <input type="number" placeholder="Contact" name="contact" id=""><br><br>
+        <textarea placeholder="Address..." name="address" cols="30" rows="10"></textarea><br><br>
+        <input type="email" placeholder="Email-id" name="email" id=""><br><br>
+        <input type="password" placeholder="Password" name="password" id=""><br><br>
+        <input type="date" name="dateofjoin" id=""><br><br>
+        <input type="file" name="photo" id=""><br><br>
+        
+        <input type="submit" value="Submit">
+    </form>
+    {% comment %} <table border=1>
+        <tr>
+            <th>SI-NO</th>
+            <th>District</th>
+            <th>Panchayat</th>
+            
+        </tr>
+        {%for i in panchayat%}
+        <tr>
+            <td>{{i.id}}</td>
+            <td>{{i.district.district_name}}</td>
+            <td>{{i.panchayat_name}}</td>
+           <td><a href="{% url 'webbasic:editpanchayat' i.id %}">Edit</a></td>
+            <td><a href="">Delete</a></td> 
+        </tr>
+        {%endfor%}
+    </table> {% endcomment %}
+</body>
+</html>

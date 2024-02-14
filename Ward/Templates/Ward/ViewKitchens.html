@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<body>
+    <table border='1'>
+        {% csrf_token %}
+        <tr>
+            <td>SI NO</td>
+            <td>Name</td>
+            <td>Contact</td>
+            <td>Address</td>
+            <td>Email</td>
+            <td>Action</td>
+        </tr>
+        {%for i in kitchen%}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.kitchen_name}}</td>
+            <td>{{i.kitchen_contact}}</td>
+            <td>{{i.kitchen_address}}</td>
+            <td>{{i.kitchen_email}}</td>
+            <td><a href="{% url 'Ward:deletekitchen' i.id %}">Delete</a></td>
+        </tr>{%endfor%}
+    </table>
+</body>
+</html>

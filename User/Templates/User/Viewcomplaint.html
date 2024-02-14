@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View complaint</title>
+</head>
+<body>
+    <table border=1>
+        <tr>
+            <td>SI NO</td>
+            <td>Title</td>
+            <td>Complaint</td>
+            <td>Date</td>
+            <td>Reply</td>
+            <td>Action</td>
+        </tr>
+        {%for i in complaint%}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.complaint_title}} </td>
+            <td>{{i.complaint_complaint}} </td>
+            <td>{{i.complaint_date}} </td>
+            <td>{{i.complaint_reply}} </td>
+            <td>
+                <a href="#">Edit</a>
+                <a href="{% url 'User:deletecomplaint' i.id %}">Delete</a>
+            </td>
+        </tr>
+        {%endfor%}
+    </table>
+</body>
+</html>

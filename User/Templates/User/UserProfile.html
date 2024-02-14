@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {%csrf_token%}
+    <form action="" method="post">
+    <table border=1>
+        <tr>
+            <td>Photo</td>
+            <td><img src="{{ user.user_photo.url }}" width='150' height='150' alt=""></td>
+        </tr>
+        <tr>
+            <td>Name</td>
+            <td>{{user.user_name}}</td>
+        </tr>
+        <tr>
+            <td>Date of Birth</td>
+            <td>{{user.user_dob}}</td>
+        </tr>
+        <tr>
+            <td>Gender</td>
+            <td>{{user.user_gender}}</td>
+        </tr>
+        <tr>
+            <td>Address</td>
+            <td>{{user.user_address}}</td>
+        </tr>
+        <tr>
+            <td>Ward</td>
+            <td>{{user.user_ward}}</td>
+        </tr>
+        
+        <tr>
+            <td>Email</td>
+            <td>{{user.user_email}}</td>
+        </tr>
+        <tr>
+            <td>Password</td>
+            <td>{{user.user_password}}</td>
+        </tr>
+        <tr>
+            <td>Proof</td>
+            <td>{{user.user_proof}}</td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

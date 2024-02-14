@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panchayat</title>
+</head>
+<body>
+    <form action="" method="post">
+        {% csrf_token %}
+        <select name="disdrop" id="district">
+            <option value="" >--District--</option>
+            {% for i in district%}
+            <option value="{{i.id}}">{{i.district_name}}</option>
+            {%endfor%}
+        </select>
+        <select name="pandrop" id="panchayat">
+            <option value="" >--Panchayat--</option>
+            
+        </select><br><br>
+
+        <input placeholder="Ward" type="text" name="ward" value="" ><br><br>
+        <input type="submit" value="Submit">
+    </form>
+    <table border=1>
+        <tr>
+            <th>SI-NO</th>
+            {% comment %} <th>District</th> {% endcomment %}
+            <th>Panchayat</th>
+            <th>Ward</th>
+            {% comment %} <th></th>
+            <th></th> {% endcomment %}
+        </tr>
+        {%for i in ward%}
+        <tr>
+            <td>{{i.id}}</td>
+            {% comment %} <td>{{i.district.district_id}}</td> {% endcomment %}
+            <td>{{i.panchayat.panchayat_name}}</td>
+            <td>{{i.ward_name}}</td>
+            {% comment %} <td><a href="{% url 'webbasic:editpanchayat' i.id %}">Edit</a></td>
+            <td><a href="">Delete</a></td> {% endcomment %}
+        </tr>
+        {%endfor%}
+    </table>
+</body>
+</html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $("#district").change(function () {
+        var did = $(this).val();
+        var ur = "{% url 'Admin:ajaxward' %}"
+        $.ajax({
+            url: ur,
+            data: { did: did, },
+            success: function (data) {
+                $("#panchayat").html(data);
+            },
+        });
+    });
+    </script>
