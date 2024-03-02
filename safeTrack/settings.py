@@ -38,12 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Admin',
-    'Panchayat',
     'Guest',
     "User",
     "HealthCenter",
     "AshaWorker",
     "Ward",
+    "Kitchencenter",
 ]
 
 MIDDLEWARE = [

@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from Guest.models import *
 from .models import *
-
+from HealthCenter.models import *
 # Create your views here.
 def userprofile(request):
         user = tbl_user.objects.get(id=request.session['uid'])
@@ -75,3 +75,13 @@ def viewcomplaint(request):
 def deletecomplaint(request,id):
     tbl_sendcomplaint.objects.get(id=id).delete()
     return redirect("User:usercomplaint")
+
+def medicinelist(request):
+        medicinedata=tbl_medicinelist.objects.all()
+        return render(request,'User/Medicinelist.html',{'medicine':medicinedata})
+        
+def requestmedicine(request,id):
+        medicine=tbl_medicinelist.objects.get(id=id)
+        user=tbl_user.objects.get(id=request.session['uid'])
+        tbl_medicinelist.objects.create(medicine_prescription=medicine,patient_id=user)
+        return redirect("User:medicinelist")

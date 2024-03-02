@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Healthcenter</title>
+</head>
+<body>
+    <table border=1 >
+        <tr>
+        <td>SI NO</td>
+        <td>Photo</td>
+        <td>Name</td>
+        <td>Ward</td>
+        <td>Address</td>
+        <td>Proof</td>
+        <td>Email</td>
+        <td>Work</td>
+        </tr>
+        {%for i in center%}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td><img src="{{center.center_photo.url}}" alt="" srcset=""></td>
+            <td>{{i.center_name}} </td>
+            <td>{{i.center_gender}} </td>
+            <td>{{i.center_ward}} </td>
+            <td>{{i.center_address}} </td>
+            <td>{{i.center_proof}} </td>
+            <td>{{i.center_email}} </td>
+            <td><a href="#">Assign</a></td>
+            {% comment %} <td><a href="{% url 'Healthcenter:medicinerequest'%}">Assign</a></td> {% endcomment %}
+        </tr>
+        {%endfor%}
+    </table>
+</body>
+</html>

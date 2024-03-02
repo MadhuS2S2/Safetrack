@@ -9,11 +9,6 @@
     <form action="" method="post" enctype="multipart/form-data">
         {%csrf_token%}
         <input type="text" placeholder="Name" name="name" value="" ><br><br>
-        {% comment %} <input type="date" placeholder="" name="dob" value="" ><br><br> {% endcomment %}
-
-        Male<input type="radio" name="gender" value="male">
-        Female<input type="radio" name="gender" value="female"><br><br>
-        
         <select name="disdrop" id="disdrop">
             <option value="">--Select--</option>
             {% for i in district%}

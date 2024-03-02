@@ -15,6 +15,7 @@
             <td>Gender</td>
             <td>Admit Date</td>
             <td>Discharge Date</td>
+            <td>Ward</td>
             <td>Status</td>
             <td>Medicine</td>
             <td>Food</td>
@@ -28,10 +29,12 @@
             <td>{{i.patient_gender}}</td>
             <td>{{i.patient_admitdate}}</td>
             <td>{{i.patient_dischargedate}}</td>
+            <td>{{i.id}}</td>
             <td>{{i.patient_vstatus}}</td>
-            <td><a href="{% url 'Healthcenter:medicinerequest' %}">Request</a></td>
-            <td><a href="#">Request</a></td>
-            <td><a href="{% url 'Healthcenter:deletepatient' i.id %}">Delete</a></td>
+            
+            <td>
+                {% comment %} <a href="#">Edit</a> {% endcomment %}
+                <a href="{% url 'Healthcenter:deletepatient' i.id %}">Delete</a></td>
         </tr>{%endfor%}
     </table>
 </body>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>District</title>
+  </head>
+  <body>
+    <form method="post">
+      {% csrf_token %}
+      <input placeholder="district" type="text" name="district" value="{{dis.district_name}}" />
+      <input type="submit" value="Submit" />
+    </form>
+    <table border=1>
+        <tr>
+            <th>SI NO</th>
+            <th>District</th>
+            {% comment %} <th>Action</th> {% endcomment %}
+        </tr>
+        {%  for i in district  %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.district_name}}</td>
+            {% comment %} <td><a href="{% url 'webbasic:deletedistrict' i.id %}">Delete</a></td>
+            <td><a href="{% url 'webbasic:editdistrict' i.id %}">Edit</a></td> {% endcomment %}
+        </tr>
+        {%  endfor %}
+    </table>
+  </body>
+</html>

@@ -11,4 +11,9 @@ urlpatterns=[
         path('viewcomplaint/',views.viewcomplaint,name='viewcomplaint'),
         path('deletecomplaint/<int:id>',views.deletecomplaint,name="deletecomplaint"),
         path('reply/<int:id>',views.reply,name="reply"),
+        path('homepage/',views.home_page,name="homepage"),
+        path('viewworkers/',views.viewworkers,name='viewworkers'),
+        path('viewhealthcenters/',views.viewhealthcenters,name='viewhealthcenters'),
+        path('viewkitchens/',views.viewkitchens,name='viewkitchens'),
+
 ]

@@ -1,0 +1,19 @@
+
+{% comment %} <a href="{% url 'Admin:reply' %}"></a> <br> {% endcomment %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+</head>
+<body>
+    hello
+    {% csrf_token %}
+    <a href="{% url 'Admin:homepage' %}">Home</a>
+<a href="{% url 'Admin:panchayat'%}">Panchayat</a> <br>
+<a href="{% url 'Admin:district' %}">District</a> <br>
+<a href="{% url 'Admin:ward' %}">Ward</a> <br>
+<a href="{% url 'Admin:viewcomplaint' %}">View Complaints</a>  <br>
+</body>
+</html>

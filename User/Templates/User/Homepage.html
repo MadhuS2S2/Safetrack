@@ -8,6 +8,15 @@
     <title>Document</title>
 </head>
 <body>
-    Welcome {{user.user_name}}
+    Welcome {{user.user_name}} <br> <br>
+    <a href="{% url 'User:homepage' %}">Home</a><br>
+    <a href="{% url 'User:userprofile'%}">View Profile</a> <br>
+    <a href="{% url 'User:editprofile' %}">Edit Profile</a> <br>
+    <a href="{% url 'User:changepassword' %}">Change Password</a> <br>
+    <a href="{% url 'User:usercomplaint' %}">Complaint</a> <br>
+    <a href="{% url 'User:userfeedback' %}">Feedback</a> <br>
+    <a href="{% url 'User:viewcomplaint' %}">View Complaints</a>  <br>
+    <a href="{% url 'User:medicinelist' %}">Medicine Request</a>  <br>
+
 </body>
 </html>

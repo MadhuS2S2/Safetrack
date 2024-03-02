@@ -95,7 +95,7 @@ def ashaworker(request):
         
         tbl_ashaworker.objects.create(worker_name=name,worker_gender=gender,worker_ward=ward,worker_address=address,worker_proof=proof,worker_photo=photo,worker_email=email,worker_password=password)
         
-        return redirect("Guest/AshaWorker.html")        
+        return redirect("Guest:login")        
     else:
         return render(request,'Guest/AshaWorker.html',{'worker': worker_data,'district': district_data,'panchayat': panchayat_data,'ward':ward_data})
     
@@ -103,6 +103,33 @@ def ashaworker(request):
 def healthcenter(request):
     
     center_data=tbl_healthcenter.objects.all()
+    district_data=tbl_district.objects.all()
+    panchayat_data=tbl_panchayat.objects.all()
+    ward_data=tbl_ward.objects.all()
+    
+    if request.method=='POST':
+        name=request.POST.get('name')
+        address=request.POST.get('address')
+
+        ward=request.POST.get('warddrop')
+        email=request.POST.get('email')
+        password=request.POST.get('password')
+        photo=request.FILES.get('photo')
+        proof=request.FILES.get('proof')
+        
+        district=tbl_district.objects.get(id=request.POST.get('disdrop'))
+        panchayat=tbl_panchayat.objects.get(id=request.POST.get('pandrop'))
+        ward=tbl_ward.objects.get(id=request.POST.get('warddrop')) 
+        
+        tbl_healthcenter.objects.create(center_name=name,center_ward=ward,center_address=address,center_proof=proof,center_photo=photo,center_email=email,center_password=password)
+        
+        return redirect("Guest:login")        
+    else:
+        return render(request,'Guest/HealthCenter.html',{'center': center_data,'district': district_data,'panchayat': panchayat_data,'ward':ward_data})
+    
+def kitchencenter(request):
+    
+    kitchen_data=tbl_kitchencenter.objects.all()
     district_data=tbl_district.objects.all()
     panchayat_data=tbl_panchayat.objects.all()
     ward_data=tbl_ward.objects.all()
@@ -122,11 +149,12 @@ def healthcenter(request):
         panchayat=tbl_panchayat.objects.get(id=request.POST.get('pandrop'))
         ward=tbl_ward.objects.get(id=request.POST.get('warddrop')) 
         
-        tbl_healthcenter.objects.create(center_name=name,center_gender=gender,center_ward=ward,center_address=address,center_proof=proof,center_photo=photo,center_email=email,center_password=password)
+        tbl_kitchencenter.objects.create(kitchen_name=name,kitchen_ward=ward,kitchen_address=address,kitchen_photo=photo,kitchen_email=email,kitchen_password=password)
         
-        return redirect("Guest/HealthCenter.html")        
+        return redirect("Guest:login")        
     else:
-        return render(request,'Guest/HealthCenter.html',{'center': center_data,'district': district_data,'panchayat': panchayat_data,'ward':ward_data})
+        return render(request,'Guest/Kitchencenter.html',{'kitchen': kitchen_data,'district': district_data,'panchayat': panchayat_data,'ward':ward_data})
+    
     
 def login(request):
     
@@ -139,15 +167,21 @@ def login(request):
         workercount=tbl_ashaworker.objects.filter(worker_email=email,worker_password=password).count()
         centrecount=tbl_healthcenter.objects.filter(center_email=email,center_password=password).count()
         membercount=tbl_wardmember.objects.filter(member_email=email,member_password=password).count()
+        admincount=tbl_admin.objects.filter(admin_email=email,admin_password=password).count()
+        kitchencount=tbl_kitchencenter.objects.filter(kitchen_email=email,kitchen_password=password).count()
         
-        if panchayathcount > 0:
+        if admincount > 0 :
+            admindata=tbl_admin.objects.get(admin_email=email,admin_password=password)
+            request.session['aid']=admindata.id
+            return redirect('Admin:homepage')
+        elif panchayathcount > 0:
             panchayat = tbl_panchayat.objects.get(panchayat_email=email,panchayat_password=password)
             request.session["pid"] = panchayat.id
             return redirect("panchayat:homepage")
         elif workercount > 0:
             worker = tbl_ashaworker.objects.get(worker_email=email,worker_password=password)
             request.session["wid"] = worker.id
-            return redirect("Guest/Homepage.html")
+            return redirect("Ashaworker:homepage")
         elif centrecount > 0:
             centre = tbl_healthcenter.objects.get(center_email=email,center_password=password)
             request.session["cid"] = centre.id
@@ -160,8 +194,15 @@ def login(request):
             user = tbl_user.objects.get(user_email=email,user_password=password)
             request.session["uid"] = user.id
             return redirect("User:homepage")
+        elif kitchencount > 0:     
+            kitchen = tbl_kitchencenter.objects.get(kitchen_email=email,kitchen_password=password)
+            request.session["kid"] = kitchen.id
+            return redirect("kitchencenter:homepage")
         else:
             return render(request,'Guest/Login.html')
     else:
         return render(request,'Guest/Login.html')
     
+def home_page(request):
+    # worker=tbl_ashaworker.objects.get(id=request.session['wid'])
+    return render(request,'Guest/Homepage.html')

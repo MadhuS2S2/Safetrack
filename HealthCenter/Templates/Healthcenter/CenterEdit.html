@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Edit centre</title>
 </head>
 <body>
     
@@ -12,31 +12,27 @@
     <table border=1>
         <tr>
             <td>Photo</td>
-            <td><img src="{{ centre.centre_photo.url }}" width='150' height='150' alt=""></td>
+            <td><img src="{{ centre.center_photo.url }}" width='150' height='150' alt=""></td>
         </tr>
         <tr>
             <td>Name</td>
-            <td><input type="text" name="name" value="{{centre.centre_name}}" ></td>
+            <td><input type="text" name="name" value="{{centre.center_name}}" ></td>
         </tr>
         <tr>
-            <td>Date of join</td>
-            <td><input type="text" name="date" value="{{centre.centre_dateofjoin}}" ></td>
-        </tr>
-        <tr>
-            <td>Contact</td>
-            <td><input type="text" name="contact" value="{{centre.centre_contact}}" ></td>
+            <td>Address</td>
+            <td><input type="text" name="address" value="{{centre.center_address}}" ></td>
         </tr>
         <tr>
             <td>Email</td>
-            <td><input type="email" name="email" value="{{centre.centre_email}}" ></td>
+            <td><input type="email" name="email" value="{{centre.center_email}}" ></td>
         </tr>
         <tr>
             <td>Password</td>
-            <td><input type="password" name="password" value="{{centre.centre_password}}" ></td>
+            <td><input type="password" name="password" value="{{centre.center_password}}" ></td>
         </tr>
         <tr>
-            <td>District</td>
-            <td><input type="text" name="district" value="{{centre.district.district_name}}" ></td>
+            <td>Ward</td>
+            <td><input type="text" name="district" value="{{centre.center_ward.ward_name}}" ></td>
         </tr>
         <tr>
             <td>

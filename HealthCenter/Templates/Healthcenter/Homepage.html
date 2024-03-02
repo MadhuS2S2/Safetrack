@@ -8,6 +8,13 @@
     <title>Document</title>
 </head>
 <body>
-    Welcome {{centre.center_name}}
+    Welcome {{centre.center_name}} <br> <br>
+    <a href="{% url 'Healthcenter:homepage' %}">Home</a><br>
+    <a href="{% url 'Healthcenter:centreprofile'%}">View Profile</a> <br>
+    <a href="{% url 'Healthcenter:centreedit' %}">Edit Profile</a> <br>
+    <a href="{% url 'Healthcenter:changepassword' %}">Change Password</a> <br>
+    <a href="{% url 'Healthcenter:addpatient' %}">Add Patient</a> <br>
+    <a href="{% url 'Healthcenter:viewpatient' %}">View Patients</a> <br>
+    <a href="{% url 'Healthcenter:medicinerequest'%}">Medicine Request</a> <br>
 </body>
 </html>

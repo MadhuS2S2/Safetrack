@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table border=1 >
+        <tr>
+        <td>SI NO</td>
+        <td>Name</td>
+        <td>Gender</td>
+        <td>Ward</td>
+        <td>Address</td>
+        <td>Email</td>
+        <td>Work</td>
+        </tr>
+        {%for i in worker%}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.worker_name}} </td>
+            <td>{{i.worker_gender}} </td>
+            <td>{{i.worker_ward}} </td>
+            <td>{{i.worker_address}} </td>
+            <td>{{i.worker_email}} </td>
+            <td><a href="#">Assign</a></td>
+            {% comment %} <td><a href="{% url 'Healthcenter:medicinerequest'%}">Assign</a></td> {% endcomment %}
+        </tr>
+        {%endfor%}
+    </table>
+</body>
+</html>

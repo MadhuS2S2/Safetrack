@@ -6,26 +6,48 @@
     <title>View complaint</title>
 </head>
 <body>
-    <table border=1>
+    {% csrf_token %}
+    <table border=1 align="center">
         <tr>
             <td>SI NO</td>
+            <td>Username</td>
             <td>Title</td>
             <td>Complaint</td>
             <td>Date</td>
-            <td>Username</td>
             <td>Action</td>
         </tr>
         {%for i in complaint%}
         <tr>
             <td>{{forloop.counter}}</td>
+            <td>{{i.user_id.user_name}} </td>
             <td>{{i.complaint_title}} </td>
             <td>{{i.complaint_content}} </td>
             <td>{{i.complaint_date}}</td>
-            <td>{{i.user_name}} </td>
             <td><a href="{% url 'Admin:reply' i.id %}">Reply</a></td>
-            
         </tr>
         {%endfor%}
+    </table>
+
+    <h2 align="center">Replied Complaints</h2>
+    <table border="1" align="center">
+        <tr>
+            <td>Sl No</td>
+            <td>User Name</td>
+            <td>Title</td>
+            <td>Description</td>
+            <td>Date</td>
+            <td>Reply</td>
+        </tr>
+        {% for i in reply%}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.user_id.user_name}}</td>
+            <td>{{i.complaint_title}} </td>
+            <td>{{i.complaint_content}} </td>
+            <td>{{i.complaint_date}}</td>
+            <td>{{i.complaint_reply}}</td>
+        </tr>
+        {% endfor %}
     </table>
 </body>
 </html>

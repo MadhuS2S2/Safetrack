@@ -10,7 +10,7 @@ def workeredit(request):
         worker = tbl_ashaworker.objects.get(id=request.session['wid'])
         if request.method == 'POST':
                 worker.worker_name = request.POST.get('name')
-                worker.worker_dateofjoin=request.POST.get('date')
+                worker.worker_dateofjoin=request.POST.get('gender')
                 worker.worker_contact=request.POST.get('contact')
                 worker.worker_email = request.POST.get('email')
                 worker.worker_password = request.POST.get('password')
@@ -40,3 +40,7 @@ def change_password(request):
             return render(request,'AshaWorker/ChangePassword.html',{'msg':msg,'worker':worker})
     else:
         return render(request,'AshaWorker/ChangePassword.html')
+    
+def home_page(request):
+    worker=tbl_ashaworker.objects.get(id=request.session['wid'])
+    return render(request,'AshaWorker/Homepage.html',{'worker':worker})

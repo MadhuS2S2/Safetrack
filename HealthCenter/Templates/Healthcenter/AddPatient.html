@@ -13,8 +13,49 @@
         Male<input type="radio" name="gender" value="male" >
         Female<input type="radio" name="gender" value="female"><br><br>
         <input type="date" name="date" ><br><br>
+        
+        <select name="disdrop" id="disdrop">
+            <option value="">--District--</option>
+            {% for i in district%}
+            <option value="{{i.id}}">{{i.district_name}}</option>
+            {%endfor%}
+        </select><br><br>
+
+        <select name="pandrop" id="pandrop">
+            <option value="select">--Panchayat--</option>
+        </select><br><br>
+
+        <select name="warddrop" id="warddrop">
+            <option value="">--ward--</option>
+        </select><br><br>
         <input type="submit" value="Save">
         <input type="reset" value="Cancel">
     </form>
 </body>
 </html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $("#disdrop").change(function () {
+        var did = $(this).val();
+        var ur = "{% url 'Healthcenter:ajaxpan' %}"
+        $.ajax({
+            url: ur,
+            data: { did: did, },
+            success: function (data) {
+                $("#pandrop").html(data);
+            },
+        });
+    });
+
+    $("#pandrop").change(function () {
+        var did = $(this).val();
+        var ur = "{% url 'Healthcenter:ajaxward' %}"
+        $.ajax({
+            url: ur,
+            data: { did: did, },
+            success: function (data) {
+                $("#warddrop").html(data);
+            },
+        });
+    });
+    </script>

@@ -10,7 +10,10 @@ urlpatterns=[
     path('changepassword/',views.change_password,name='changepassword'),
     path('addpatient/',views.addpatient,name='addpatient'),
     path('viewpatient/',views.viewpatient,name='viewpatient'),
-    path('medicinerequest/',views.medicinerequest,name='medicinerequest'),
+    path('medicinerequest/<int:id>',views.medicinerequest,name='medicinerequest'),
     path('deletepatient/<int:id>',views.deletepatient,name="deletepatient"),
-
+    path('ajaxward/',views.ajaxward,name="ajaxward"),
+    path('ajaxpan/',views.ajaxpan,name="ajaxpan"),
+    path('district/',views.district,name="district"),
+    path('foodrequest/<int:fid>',views.foodrequest,name="foodrequest"),
 ]

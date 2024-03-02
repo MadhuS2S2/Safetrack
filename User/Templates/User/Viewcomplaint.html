@@ -19,11 +19,10 @@
         <tr>
             <td>{{forloop.counter}}</td>
             <td>{{i.complaint_title}} </td>
-            <td>{{i.complaint_complaint}} </td>
+            <td>{{i.complaint_content}} </td>
             <td>{{i.complaint_date}} </td>
             <td>{{i.complaint_reply}} </td>
             <td>
-                <a href="#">Edit</a>
                 <a href="{% url 'User:deletecomplaint' i.id %}">Delete</a>
             </td>
         </tr>

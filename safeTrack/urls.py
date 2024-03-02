@@ -23,11 +23,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('Admin/',include('Admin.urls')),
     path('Guest/',include('Guest.urls')),
-    path('Panchayat/',include('Panchayat.urls')),
     path('User/',include('User.urls')),
     path('Ashaworker/',include('AshaWorker.urls')),
     path('Healthcenter/',include('HealthCenter.urls')),
-    # path('Wardmember/',include('Wardmember.urls)')),
+    path('Kitchencenter/',include('Kitchencenter.urls')),
     path('Ward/',include('Ward.urls')),
 ]
 

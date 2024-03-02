@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Kitchencenters</title>
+</head>
+<body>
+    <table border=1 >
+        <tr>
+        <td>SI NO</td>
+        <td>Photo</td>
+        <td>Name</td>
+        <td>Ward</td>
+        <td>Address</td>
+        <td>Email</td>
+        <td>Work</td>
+        </tr>
+        {%for i in kitchen%}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td><img src="{{kitchen.kitchen_photo.url}}" alt="" srcset=""></td>
+            <td>{{i.kitchen_name}} </td>
+            <td>{{i.kitchen_ward}} </td>
+            <td>{{i.kitchen_address}} </td>
+            <td>{{i.kitchen_email}} </td>
+            <td><a href="#">Assign</a></td>
+            {% comment %} <td><a href="{% url 'Healthcenter:medicinerequest'%}">Assign</a></td> {% endcomment %}
+        </tr>
+        {%endfor%}
+    </table>
+</body>
+</html>

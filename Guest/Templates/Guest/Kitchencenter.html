@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>kitchen</title>
+</head>
+<body>
+    <form action="" method="post" enctype="multipart/form-data">
+        {%csrf_token%}
+        <input type="text" placeholder="Name" name="name" value="" ><br><br>
+        
+        <select name="disdrop" id="disdrop">
+            <option value="">--Select--</option>
+            {% for i in district%}
+            <option value="{{i.id}}">{{i.district_name}}</option>
+            {%endfor%}
+        </select><br><br>
+
+        <select name="pandrop" id="pandrop">
+            <option value="select">select</option>
+        </select><br><br>
+
+        <select name="warddrop" id="warddrop">
+            <option value="">select</option>
+        </select><br><br>
+
+        <textarea type="text" placeholder="Address..." name="address" value=""></textarea><br><br>
+        Photo:<input type="file" name="photo" id=""><br><br>
+        <input type="email" placeholder="E-mail" name="email" value="" ><br><br>
+        <input type="password" placeholder="Password" name="password" value="" ><br><br>
+
+        <input type="submit" value="Submit">
+        <input type="reset" value="Cancel">
+
+    </form>
+</body>
+</html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $("#disdrop").change(function () {
+        var did = $(this).val();
+        var ur = "{% url 'Guest:ajaxpan' %}"
+        $.ajax({
+            url: ur,
+            data: { did: did, },
+            success: function (data) {
+                $("#pandrop").html(data);
+            },
+        });
+    });
+
+    $("#pandrop").change(function () {
+        var did = $(this).val();
+        var ur = "{% url 'Guest:ajaxward' %}"
+        $.ajax({
+            url: ur,
+            data: { did: did, },
+            success: function (data) {
+                $("#warddrop").html(data);
+            },
+        });
+    });
+    </script> 

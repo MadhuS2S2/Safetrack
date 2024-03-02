@@ -12,5 +12,7 @@ urlpatterns=[
     path('userfeedback/',views.userfeedback,name='userfeedback'),
     path('viewcomplaint/',views.viewcomplaint,name='viewcomplaint'),
     path('deletecomplaint/<int:id>',views.deletecomplaint,name="deletecomplaint"),
-
+    path('medicinelist/',views.medicinelist,name='medicinelist'),
+    path('requestmedicine/<int:id>',views.requestmedicine,name='requestmedicine'),
+    
 ]

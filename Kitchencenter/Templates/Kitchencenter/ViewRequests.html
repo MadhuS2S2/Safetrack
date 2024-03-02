@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<body>
+    <table border='1'>
+        {% csrf_token %}
+        <tr>
+            <td>SI NO</td>
+            <td>Date</td>
+            <td>Status</td>
+            <td>Patient Name</td>
+            <td>Patient Ward</td>
+            <td colspan='2'align='center'>Action</td>
+        </tr>
+        {%for i in requestdata%}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.food_date}}</td>
+            <td>{{i.food_status}}</td>
+            <td>{{i.patient_id.patient_name}}</td>
+            <td>{{i.patient_id.patient_ward.ward_name}}</td>
+            <td><a href="">Accept</a></td>
+            <td><a href="">Reject</a></td>
+        </tr>
+        {%endfor%}
+    </table>
+</body>
+</html>

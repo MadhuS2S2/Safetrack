@@ -3,6 +3,11 @@ from .models import *
 from Guest.models import *
 from User.models import *
 # Create your views here.
+
+def home_page(request):
+    admin=tbl_admin.objects.get(id=request.session['aid'])
+    return render(request,'Admin/Homepage.html',{'admin':admin})
+
 def district(request):
     district_data=tbl_district.objects.all()
     if request.method=="POST":
@@ -52,18 +57,33 @@ def ajaxward(request):
     return render(request,"Admin/Ajax.html",{"panchayat":panchayat })
 
 def viewcomplaint(request):
-        complaint = tbl_sendcomplaint.objects.all()
-        return render(request,'Admin/ViewComplaint.html',{'complaint':complaint})
+        replydata = tbl_sendcomplaint.objects.filter(complaint_status=1)
+        complaintdata = tbl_sendcomplaint.objects.filter(complaint_status=0)
+        return render(request,'Admin/ViewComplaint.html',{'complaint':complaintdata, 'reply':replydata})
 
 def deletecomplaint(request,id):
     tbl_sendcomplaint.objects.get(id=id).delete()
     return redirect("Admin:usercomplaint")
 
 def reply(request,id):
-    user=tbl_user.objects.get(id=request.session['uid'])
+    complaint=tbl_sendcomplaint.objects.get(id=id)
     if request.method=="POST":
         reply = request.POST.get("reply")
-        tbl_sendcomplaint.objects.create(complaint_reply=reply,user_id=user)
-        return render(request,"Admin/Reply.html")
+        complaint.complaint_reply=reply
+        complaint.complaint_status=1
+        complaint.save()
+        return redirect('Admin:viewcomplaint')
     else:
         return render(request,"Admin/Reply.html")
+    
+def viewworkers(request):
+    Workers = tbl_ashaworker.objects.all()
+    return render(request,'Admin/Viewashaworkers.html',{'worker':Workers})
+
+def viewhealthcenters(request):
+    center = tbl_healthcenter.objects.all()
+    return render(request,'Admin/Viewhealthcenters.html',{'center':center})
+
+def viewkitchens(request):
+    kitchen = tbl_kitchencenter.objects.all()
+    return render(request,'Admin/Viewkitchens.html',{'kitchen':kitchen})
