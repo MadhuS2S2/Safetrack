@@ -121,7 +121,7 @@ def healthcenter(request):
         panchayat=tbl_panchayat.objects.get(id=request.POST.get('pandrop'))
         ward=tbl_ward.objects.get(id=request.POST.get('warddrop')) 
         
-        tbl_healthcenter.objects.create(center_name=name,center_ward=ward,center_address=address,center_proof=proof,center_photo=photo,center_email=email,center_password=password)
+        tbl_healthcenter.objects.create(center_name=name,center_ward=ward,center_address=address,center_email=email,center_password=password)
         
         return redirect("Guest:login")        
     else:

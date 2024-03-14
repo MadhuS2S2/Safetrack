@@ -37,8 +37,8 @@ class tbl_healthcenter(models.Model):
     center_name = models.CharField(max_length=30)
     center_ward=models.ForeignKey(tbl_ward,on_delete=models.CASCADE,null=True)
     center_address = models.CharField(max_length=30)
-    center_proof =  models.FileField(upload_to='images/')
-    center_photo = models.FileField(upload_to='images/')
+    center_proof =  models.FileField(upload_to='images/',default='images/user.png')
+    center_photo = models.FileField(upload_to='images/',default='images/user.png')
     center_email = models.CharField(max_length=30)
     center_password = models.CharField(max_length=30)
     

@@ -5,7 +5,6 @@ app_name='Healthcenter'
 
 urlpatterns=[
     path('Homepage/',views.home_page,name='homepage'),
-    path('profilepage/',views.profilepage,name='profilepage'),
     path('centreprofile/',views.centreprofile,name='centreprofile'),
     path('centreedit/',views.centreedit,name='centreedit'),
     path('changepassword/',views.change_password,name='changepassword'),

@@ -14,13 +14,21 @@ def centreprofile(request):
 def centreedit(request):
         centre = tbl_healthcenter.objects.get(id=request.session['cid'])
         if request.method == 'POST':
-                centre.center_photo=request.POST.get('photo')
-                centre.center_name = request.POST.get('name')
-                # centre.centre_contact=request.POST.get('contact')
-                centre.center_email = request.POST.get('email')
-                centre.center_ward.ward_name=request.POST.get('ward')
-                centre.save()
-                return redirect('Healthcenter:centreprofile')
+                if request.FILES.get('photo'):
+                        centre.center_photo=request.FILES.get('photo')
+                        centre.center_name = request.POST.get('name')
+                        # centre.centre_contact=request.POST.get('contact')
+                        centre.center_email = request.POST.get('email')
+                        centre.center_ward.ward_name=request.POST.get('ward')
+                        centre.save()
+                        return redirect('Healthcenter:centreprofile')
+                else:
+                        centre.center_name = request.POST.get('name')
+                        # centre.centre_contact=request.POST.get('contact')
+                        centre.center_email = request.POST.get('email')
+                        centre.center_ward.ward_name=request.POST.get('ward')
+                        centre.save()
+                        return redirect('Healthcenter:centreprofile')
         else:
                 return render(request,'Healthcenter/CenterEdit.html',{'center':centre})
 
@@ -30,9 +38,11 @@ def change_password(request):
         currentpass=request.POST.get("currentpassword")
         if centre.center_password == currentpass:
             newpass=request.POST.get("newpassword")
-            conpass=request.POST.get("confirmpassword")
+            
+            conpass=request.POST.get("confrimpassword")
+            print(request.POST.get("currentpassword"))
             if newpass==conpass:
-                centre.centre_password=newpass
+                centre.center_password=newpass
                 centre.save()
                 msg="successfully"
                 return render(request,'Healthcenter/ChangePassword.html',{'msg':msg})
@@ -49,9 +59,6 @@ def home_page(request):
     centre=tbl_healthcenter.objects.get(id=request.session['cid'])
     return render(request,'Healthcenter/Homepage.html',{'centre':centre})
 
-def profilepage(request):
-    centre=tbl_healthcenter.objects.get(id=request.session['cid'])
-    return render(request,'Healthcenter/Profilepage.html',{'centre':centre})
 
 def addpatient(request):
         patientdata=tbl_patient.objects.all()

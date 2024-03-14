@@ -1,52 +1,4 @@
- {% comment %} <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit center</title>
-</head>
-<body>
-    
-    <form action="" method="post">
-        {% csrf_token %}
-    <table border=1>
-        <tr>
-            <td>Photo</td>
-            <td><img src="{{ center.center_photo.url }}" width='150' height='150' alt=""></td>
-        </tr>
-        <tr>
-            <td>Name</td>
-            <td><input type="text" name="name" value="{{center.center_name}}" ></td>
-        </tr>
-        <tr>
-            <td>Address</td>
-            <td><input type="text" name="address" value="{{center.center_address}}" ></td>
-        </tr>
-        <tr>
-            <td>Email</td>
-            <td><input type="email" name="email" value="{{center.center_email}}" ></td>
-        </tr>
-        <tr>
-            <td>Password</td>
-            <td><input type="password" name="password" value="{{center.center_password}}" ></td>
-        </tr>
-        <tr>
-            <td>Ward</td>
-            <td><input type="text" name="district" value="{{center.center_ward.ward_name}}" ></td>
-        </tr>
-        <tr>
-            <td>
-                <input type="submit" value="Submit">
-                <input type="reset" value="Cancel">     
-            </td>
-        </tr>
-    </table>
-</form>
-</body>
-</html> {% endcomment %}
 
-
-<!--Website: wwww.codingdung.com-->
 <!DOCTYPE html>
 <html lang="en">
 {% load static %}
@@ -60,8 +12,10 @@
 
 <body>
     <div class="container light-style flex-grow-1 container-p-y">
+        
         <h4 class="font-weight-bold py-3 mb-4">
-           Edit Profile
+            <a href="{% url 'Healthcenter:homepage'%}">Back</a> 
+           Edit Profile 
         </h4>
         <div class="card overflow-hidden">
             <div class="row no-gutters row-bordered row-border-light">
@@ -76,13 +30,13 @@
                         <a class="list-group-item list-group-item-action" 
                             href="#account-notifications">Notifications</a>
                         <a class="list-group-item list-group-item-action" 
-                            href="#account-notifications">Log Out</a>
+                            href="{% url 'Guest:homepage'%}">Log Out</a>
                     </div>
                 </div>
                 <div class="col-md-9">
                     <div class="tab-content">
                         <div class="tab-pane fade active show" id="account-general">
-                            <form action="" method="post">
+                            <form action="" method="post" enctype="multipart/form-data">
                                 {% csrf_token %}
                                 <div class="card-body media align-items-center">
                                     <img src="{{center.center_photo.url}}" alt
@@ -106,7 +60,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="form-label">Ward</label>
-                                        <input name="ward" type="number" class="form-control" value="{{center.center_ward.ward_name}}">
+                                        <input name="ward" type="text" class="form-control" value="{{center.center_ward.ward_name}}">
                                     </div>
                                     <div class="form-group">
                                         <label class="form-label">Contact</label>
