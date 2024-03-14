@@ -1,0 +1,32 @@
+{% extends 'Admin/Header.html' %}
+{% load static %}
+{% block content %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table border='1'>
+        <tr>
+            <td>Healthcenter Count</td>
+            <td>Ward Count</td>
+            <td>Kitchencenter Count</td>
+            <td>Admitted Count</td>
+            <td>Discharged Count</td>
+        </tr>
+        <tr>
+            <td>{{center}}</td>
+            <td>{{wardcount}}</td>
+            <td>{{kitchencount}}</td>
+            <td>{{data}}</td>
+            <td>{{discharged}}</td>
+        </tr>
+    </table>
+</body>
+</html>
+{% endblock content %}

@@ -1,3 +1,6 @@
+{% extends 'Admin/Header.html' %}
+{% load static %}
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +9,7 @@
     <title>View Kitchencenters</title>
 </head>
 <body>
-    <table border=1 >
+    <table border=1 cellpadding="10">
         <tr>
         <td>SI NO</td>
         <td>Photo</td>
@@ -31,3 +34,4 @@
     </table>
 </body>
 </html>
+{% endblock content %}

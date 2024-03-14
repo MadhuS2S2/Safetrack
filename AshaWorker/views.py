@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from Guest.models import *
+from Kitchencenter.models import *
 # Create your views here.
 
 def workerprofile(request):
@@ -44,3 +45,14 @@ def change_password(request):
 def home_page(request):
     worker=tbl_ashaworker.objects.get(id=request.session['wid'])
     return render(request,'AshaWorker/Homepage.html',{'worker':worker})
+
+def viewtasks(request):
+    taskdata=tbl_tasklist.objects.all()
+    return render(request,'AshaWorker/Viewtasks.html',{'tasks':taskdata})
+  
+def taskcompleted(request,id):
+        task=tbl_tasklist.objects.get(id=id)
+        task.task_status="Completed"
+        task.save()
+        return redirect("Ashaworker:viewtasks")
+    

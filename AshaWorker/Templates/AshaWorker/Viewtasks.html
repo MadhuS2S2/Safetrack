@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table border='1'>
+        {% csrf_token %}
+        <tr>
+            <td>SI NO</td>
+            <td>Task Title</td>
+            <td>Patient Name</td>
+            <td>Patient Address</td>
+            <td>Patient Ward</td>
+            <td>Task Date</td>
+            <td>Task status</td>
+            <td>Current Status</td>
+        </tr>
+        {%for i in tasks%}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.task_title}}</td>
+            <td>{{i.patient_name}}</td>
+            <td>{{i.patient_address}}</td>
+            <td>{{i.patient_ward}}</td>
+            <td>{{i.task_date}}</td>
+            <td>{{i.task_status}}</td>
+            <td><a href="{% url 'Ashaworker:taskcompleted' i.id %}">Done</a></td>
+        </tr>
+        {%endfor%}
+    </table>
+</body>
+</html>

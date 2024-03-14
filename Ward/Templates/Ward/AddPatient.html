@@ -8,11 +8,11 @@
 <body>
     <form action="" method="post">
         {% csrf_token %}
-        <input type="text" placeholder="Name" name="name" ><br><br>
-        <input type="number" placeholder="Age" name="age" ><br><br>
-        Male<input type="radio" name="gender" value="male" >
-        Female<input type="radio" name="gender" value="female"><br><br>
-        <input type="date" name="date" ><br><br>
+        <input required type="text" placeholder="Name" name="name" ><br><br>
+        <input required type="number" placeholder="Age" name="age" ><br><br>
+        Male<input required type="radio" name="gender" value="male" >
+        Female<input required type="radio" name="gender" value="female"><br><br>
+        <input required type="date" name="date" ><br><br>
         <input type="submit" value="Save">
         <input type="reset" value="Cancel">
     </form>

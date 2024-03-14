@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="" method="post">
+        {% csrf_token %}
+        <textarea required name="foodname" id="" cols="30" rows="10" placeholder="Foodname"></textarea><br><br>
+        <input type="submit" value="Save">
+        <input type="reset" value="Cancel"><br><br>
+    </form>
+
+    <table border='1'>
+        <tr>
+            <td>SI NO</td>
+            <td>Food item</td>
+            <td>Date</td>
+        </tr>
+        {%for i in food%}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.food_name}}</td>
+            <td>{{i.food_date}}</td>
+        </tr>
+        {%endfor%}
+    </table>
+</body>
+</html>

@@ -8,4 +8,9 @@ urlpatterns=[
     path('kitchenprofile/',views.kitchenprofile,name='kitchenprofile'),
     path('kitchenedit/',views.kitchenedit,name='kitchenedit'),
     path('viewrequest/',views.viewrequest,name='viewrequest'),
+    path('addfood/',views.addfood,name='addfood'),
+    path('assigntask/<int:id>',views.assigntask,name='assigntask'),
+    path('changepassword/',views.change_password,name='changepassword'),
+    path('addfood/',views.addfood,name='addfood'),
+    
 ]

@@ -12,7 +12,8 @@
     <table border=1>
         <tr>
             <td>Photo</td>
-            <td><img src="{{ user.user_photo.url }}" width='150' height='150' alt=""></td>
+            <td><img src="{{ user.user_photo.url }}" width='150' height='150' alt=""><br>
+                <input type="file" name="profile"></td>
         </tr>
         <tr>
             <td>Name</td>
@@ -32,7 +33,7 @@
         </tr>
         <tr>
             <td>Ward</td>
-            <td><input type="text" name="ward" value="{{user.user_ward}}"></td>
+            <td><input type="text" name="ward" value="{{user.user_ward.ward_name}}"></td>
         </tr>
         <tr>
             <td>Email</td>
@@ -41,7 +42,7 @@
         <tr>
             <td>Proof</td>
             <td>
-            <img src="{{user.user_proof}} " width='150' height='150' alt=""><br>
+            <img src="{{user.user_proof.url}} " width='150' height='150' alt=""><br>
             <input type="file" name="proof"></td>
         </tr>
         <tr>

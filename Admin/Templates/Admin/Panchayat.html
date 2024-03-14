@@ -1,3 +1,9 @@
+{% extends 'Admin/Header.html' %}
+{% load static %}
+{% block content %}
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +12,8 @@
     <title>Panchayat</title>
 </head>
 <body>
-    <form action="" method="post" enctype="multipart/form-data" >
+  <br><br><br>
+    <form action="" method="post" enctype="multipart/form-data" align="center">
         {% csrf_token %}
         <select name="dropdown" id="">
             <option value="" >--District--</option>
@@ -44,3 +51,6 @@
     </table> {% endcomment %}
 </body>
 </html>
+{% endblock content %}
+
+

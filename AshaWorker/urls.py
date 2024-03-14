@@ -8,4 +8,7 @@ urlpatterns=[
     path('workeredit/',views.workeredit,name='workeredit'),
     path('changepassword/',views.change_password,name='changepassword'),
     path('Homepage/',views.home_page,name='homepage'),
+    path('viewtasks/',views.viewtasks,name='viewtasks'),
+    path('taskcompleted/<int:id>',views.taskcompleted,name="taskcompleted"),
+
 ]

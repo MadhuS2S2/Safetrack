@@ -96,3 +96,26 @@ def kitchenreg(request):
 def viewkitchen(request):
         kitchendata = tbl_kitchen.objects.all()
         return render(request,'Ward/ViewKitchens.html',{'kitchen':kitchendata})
+
+def PatientReport(request):
+        member=tbl_wardmember.objects.get(id=request.session['mid'])
+        warddata=member.member_ward
+        print(warddata)
+        if request.method == 'POST':
+                fromdate=request.POST.get('from_date')
+                # todate=request.POST.get('to_date')
+                patient=tbl_patient.objects.filter(patient_admitdate__gte=fromdate,patient_admitdate__lte=todate,patient_ward=warddata.id,patient_vstatus=0)
+                print(patient)
+                return render(request,'Ward/Report.html',{'data':patient})
+        else:
+                return render(request,'Ward/Report.html')
+        
+def PatientcountReport(request):
+        member=tbl_wardmember.objects.get(id=request.session['mid'])
+        warddata=member.member_ward
+        # print(warddata)
+        patient=tbl_patient.objects.filter(patient_ward=warddata.id,patient_vstatus=0).count()
+        discharged=tbl_patient.objects.filter(patient_ward=warddata.id,patient_vstatus=1).count()
+        print(patient)
+        return render(request,'Ward/PatientCountReport.html',{'data':patient,'discharged':discharged})
+        

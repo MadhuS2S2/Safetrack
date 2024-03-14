@@ -6,6 +6,30 @@
     <title>Document</title>
 </head>
 <body>
-    
+    {% csrf_token %}
+    <table border='1'>
+        <tr>
+            <td>SI NO</td>
+            <td>Patient Name</td>
+            <td>Ward</td>
+            <td>Address</td>
+            <td>Prescription</td>
+            <td>Date</td>
+            <td>Action</td>
+            <td>Assign</td>
+        </tr>
+        {%for i in medicine%}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.user_id.user_name}}</td>
+            <td>{{i.user_id.user_ward.ward_name}}</td>
+            <td>{{i.user_id.user_address}}</td>
+            <td>{{i.medicine_prescription}}</td>
+            <td>{{i.medicine_date}}</td>
+            <td><a href="#">Accept</a></td>
+            <td><a href="{% url 'Healthcenter:assigntask' i.id%}">Worker</a></td>
+        </tr>
+        {%endfor%}
+    </table>
 </body>
 </html>

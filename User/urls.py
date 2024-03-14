@@ -14,5 +14,7 @@ urlpatterns=[
     path('deletecomplaint/<int:id>',views.deletecomplaint,name="deletecomplaint"),
     path('medicinelist/',views.medicinelist,name='medicinelist'),
     path('requestmedicine/<int:id>',views.requestmedicine,name='requestmedicine'),
-    
+    path('foodlist/',views.foodlist,name='foodlist'),
+    path('requestfood/<int:id>',views.requestfood,name='requestfood'),
+
 ]

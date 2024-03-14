@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from Guest.models import *
 from .models import *
 from HealthCenter.models import *
+from Kitchencenter.models import *
 # Create your views here.
 def userprofile(request):
         user = tbl_user.objects.get(id=request.session['uid'])
@@ -10,15 +11,16 @@ def userprofile(request):
 def editprofile(request):
         user = tbl_user.objects.get(id=request.session['uid'])
         if request.method == 'POST':
+                user.user_photo=request.POST.get('profile')
                 user.user_name = request.POST.get('name')
                 user.user_dob = request.POST.get('dob')
                 user.user_gender = request.POST.get('gender')
                 user.user_address = request.POST.get('address')
-                user.user_ward = request.POST.get('ward')
+                user.user_ward.ward_name = request.POST.get('ward')
                 user.user_email = request.POST.get('email')
                 user.user_proof= request.POST.get('proof')
                 user.save()
-                return render(request,'User/UserEdit.html',{'user':user})
+                return redirect("User:userprofile")
         else:
                 return render(request,'User/UserEdit.html',{'user':user})
 
@@ -77,11 +79,25 @@ def deletecomplaint(request,id):
     return redirect("User:usercomplaint")
 
 def medicinelist(request):
-        medicinedata=tbl_medicinelist.objects.all()
+        user=tbl_user.objects.get(id=request.session['uid'])
+        wardid=user.user_ward
+        medicinedata=tbl_medicinelist.objects.filter(Healthcenter__center_ward=wardid)
         return render(request,'User/Medicinelist.html',{'medicine':medicinedata})
+
+def foodlist(request):
+        user=tbl_user.objects.get(id=request.session['uid'])
+        wardid=user.user_ward
+        fooddata=tbl_foodlist.objects.filter(kitchen__kitchen_ward=wardid)
+        return render(request,'User/Foodlist.html',{'food':fooddata})
         
 def requestmedicine(request,id):
         medicine=tbl_medicinelist.objects.get(id=id)
         user=tbl_user.objects.get(id=request.session['uid'])
-        tbl_medicinelist.objects.create(medicine_prescription=medicine,patient_id=user)
+        tbl_medicinerequest.objects.create(medicine_prescription=medicine.medicine_prescription,user_id=user)
         return redirect("User:medicinelist")
+    
+def requestfood(request,id):
+        food=tbl_foodlist.objects.get(id=id)
+        user=tbl_user.objects.get(id=request.session['uid'])
+        tbl_foodrequest.objects.create(food_name=food.food_name,user_id=user)
+        return redirect("User:foodlist")

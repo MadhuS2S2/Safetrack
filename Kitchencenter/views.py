@@ -2,6 +2,9 @@ from django.shortcuts import render,redirect
 from Guest.models import *
 from HealthCenter.models import *
 from Admin.models import *
+from .models import *
+from User.models import *
+from AshaWorker.models import *
 # Create your views here.
 
 def kitchenprofile(request):
@@ -13,9 +16,7 @@ def kitchenedit(request):
         if request.method == 'POST':
                 kitchen.kitchen_name = request.POST.get('name')
                 kitchen.kitchen_address=request.POST.get('address')
-                kitchen.kitchen_contact=request.POST.get('contact')
                 kitchen.kitchen_email = request.POST.get('email')
-                kitchen.kitchen_password = request.POST.get('password')
                 kitchen.kitchen_district=request.POST.get('district')
                 kitchen.save()
                 return render(request,'Kitchencenter/KitchenEdit.html',{'kitchen':kitchen})
@@ -30,28 +31,40 @@ def viewrequest(request):
     requestdata = tbl_foodrequest.objects.all()
     return render(request,'Kitchencenter/ViewRequests.html',{'requestdata':requestdata})
 
-# def foodstatus(request,sid):
-#     requestdata = tbl_foodrequest.objects.get(id=sid)
-    
+def addfood(request):
+        fooddata=tbl_foodlist.objects.all()
+        kitchen=tbl_kitchencenter.objects.get(id=request.session['kid'])
+        
+        if request.method=='POST':
+                food=request.POST.get('foodname')
+                tbl_foodlist.objects.create(food_name=food,kitchen=kitchen)
+                return render(request,'Kitchencenter/Addfood.html')
+        else:
+                return render(request,'Kitchencenter/Addfood.html',{'food':fooddata})
 
-# def change_password(request):
-#     centre=tbl_healthcenter.objects.get(id=request.session['cid'])
-#     if request.method=="POST":
-#         currentpass=request.POST.get("currentpassword")
-#         if centre.center_password == currentpass:
-#             newpass=request.POST.get("newpassword")
-#             conpass=request.POST.get("confirmpassword")
-#             if newpass==conpass:
-#                 centre.centre_password=newpass
-#                 centre.save()
-#                 msg="successfully"
-#                 return render(request,'Healthcenter/ChangePassword.html',{'msg':msg})
-#             else:
-#                 msg="Cannot Change Password"
-#                 return render(request,'Healthcenter/ChangePassword.html',{'msg':msg})
-#         else:
-#             msg="Password Incorrect"
-#             return render(request,'Healthcenter/ChangePassword.html',{'msg':msg,'centre':centre})
-#     else:
-#         return render(request,'Healthcenter/ChangePassword.html')
+def assigntask(request,id):
+        food=tbl_foodrequest.objects.get(id=id)
+        tbl_tasklist.objects.create(task_title="Deliver food",patient_name=food.user_id.user_name,patient_address=food.user_id.user_address,patient_ward=food.user_id.user_ward.ward_name,task_status="Assigned")
+        return redirect("kitchencenter:viewrequest")
+
+def change_password(request):
+    kitchendata=tbl_kitchencenter.objects.get(id=request.session['kid'])
+    if request.method=="POST":
+        currentpass=request.POST.get("currentpassword")
+        if centre.center_password == currentpass:
+            newpass=request.POST.get("newpassword")
+            conpass=request.POST.get("confirmpassword")
+            if newpass==conpass:
+                centre.centre_password=newpass
+                centre.save()
+                msg="successfully"
+                return render(request,'kitchencenter/ChangePassword.html',{'msg':msg})
+            else:
+                msg="Cannot Change Password"
+                return render(request,'kitchencenter/ChangePassword.html',{'msg':msg})
+        else:
+            msg="Password Incorrect"
+            return render(request,'kitchencenter/ChangePassword.html',{'msg':msg,'centre':centre})
+    else:
+        return render(request,'kitchencenter/ChangePassword.html')
     

@@ -10,21 +10,24 @@
         {% csrf_token %}
         <tr>
             <td>SI NO</td>
-            <td>Date</td>
-            <td>Status</td>
             <td>Patient Name</td>
-            <td>Patient Ward</td>
-            <td colspan='2'align='center'>Action</td>
+            <td>Ward</td>
+            <td>Address</td>
+            <td>Food</td>
+            <td>Date</td>
+            <td>Action</td>
+            <td>Assign</td>
         </tr>
         {%for i in requestdata%}
         <tr>
             <td>{{forloop.counter}}</td>
+            <td>{{i.user_id.user_name}}</td>
+            <td>{{i.user_id.user_ward.ward_name}}</td>
+            <td>{{i.user_id.user_address}}</td>
+            <td>{{i.food_name}}</td>
             <td>{{i.food_date}}</td>
-            <td>{{i.food_status}}</td>
-            <td>{{i.patient_id.patient_name}}</td>
-            <td>{{i.patient_id.patient_ward.ward_name}}</td>
-            <td><a href="">Accept</a></td>
-            <td><a href="">Reject</a></td>
+            <td><a href="#">Accept</a></td>
+            <td><a href="{% url 'kitchencenter:assigntask' i.id%}">Worker</a></td>
         </tr>
         {%endfor%}
     </table>

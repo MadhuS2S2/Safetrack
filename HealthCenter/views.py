@@ -2,24 +2,27 @@ from django.shortcuts import render,redirect
 from Guest.models import *
 from .models import *
 from Admin.models import *
+from User.models import *
+from Kitchencenter.models import *
+from datetime import datetime
 # Create your views here.
 
 def centreprofile(request):
         Healthcenter = tbl_healthcenter.objects.get(id=request.session['cid'])
-        return render(request,'Healthcenter/CenterProfile.html',{'center':Healthcenter})
+        return render(request,'Healthcenter/CenterProfile.html',{'profile':Healthcenter})
 
 def centreedit(request):
         centre = tbl_healthcenter.objects.get(id=request.session['cid'])
         if request.method == 'POST':
-                centre.centre_name = request.POST.get('name')
-                centre.centre_contact=request.POST.get('contact')
-                centre.centre_email = request.POST.get('email')
-                centre.centre_password = request.POST.get('password')
-                centre.centre_district=request.POST.get('district')
+                centre.center_photo=request.POST.get('photo')
+                centre.center_name = request.POST.get('name')
+                # centre.centre_contact=request.POST.get('contact')
+                centre.center_email = request.POST.get('email')
+                centre.center_ward.ward_name=request.POST.get('ward')
                 centre.save()
-                return render(request,'Healthcenter/CenterEdit.html',{'centre':centre})
+                return redirect('Healthcenter:centreprofile')
         else:
-                return render(request,'Healthcenter/CenterEdit.html',{'centre':centre})
+                return render(request,'Healthcenter/CenterEdit.html',{'center':centre})
 
 def change_password(request):
     centre=tbl_healthcenter.objects.get(id=request.session['cid'])
@@ -46,6 +49,10 @@ def home_page(request):
     centre=tbl_healthcenter.objects.get(id=request.session['cid'])
     return render(request,'Healthcenter/Homepage.html',{'centre':centre})
 
+def profilepage(request):
+    centre=tbl_healthcenter.objects.get(id=request.session['cid'])
+    return render(request,'Healthcenter/Profilepage.html',{'centre':centre})
+
 def addpatient(request):
         patientdata=tbl_patient.objects.all()
         district_data=tbl_district.objects.all()
@@ -56,13 +63,14 @@ def addpatient(request):
                 name=request.POST.get('name')
                 age=request.POST.get('age')
                 gender=request.POST.get('gender')
+                contact=request.POST.get('phone')
                 date=request.POST.get('date')
                 
                 district=tbl_district.objects.get(id=request.POST.get('disdrop'))
                 panchayat=tbl_panchayat.objects.get(id=request.POST.get('pandrop'))
                 ward=tbl_ward.objects.get(id=request.POST.get('warddrop')) 
         
-                tbl_patient.objects.create(patient_name=name,patient_age=age,patient_gender=gender,patient_admitdate=date,patient_dischargedate=0,patient_ward=ward,patient_vstatus=0)
+                tbl_patient.objects.create(patient_name=name,patient_age=age,patient_gender=gender,patient_contact=contact,patient_dischargedate=0,patient_ward=ward.id,patient_vstatus=0)
                 return render(request,'Healthcenter/ViewPatients.html',{'patient':patientdata,'district': district_data,'panchayat': panchayat_data,'ward':ward_data})
         else:
                 return render(request,'Healthcenter/AddPatient.html',{'patient':patientdata,'district': district_data,'panchayat': panchayat_data,'ward':ward_data})
@@ -71,19 +79,29 @@ def viewpatient(request):
         patientdata = tbl_patient.objects.all()
         return render(request,'Healthcenter/ViewPatients.html',{'patient':patientdata})
 
-def medicinerequest(request,id):
-        patient=tbl_patient.objects.get(id=id)
+def addmedicines(request):
         medicinedata=tbl_medicinerequest.objects.all()
+        centre=tbl_healthcenter.objects.get(id=request.session['cid'])
+        
         if request.method=='POST':
                 prescription=request.POST.get('prescription')
-                tbl_medicinerequest.objects.create(medicine_prescription=prescription,patient_id=patient)
-                return render(request,'Healthcenter/MedicineRequest.html')
+                tbl_medicinelist.objects.create(medicine_prescription=prescription,Healthcenter=centre)
+                return render(request,'Healthcenter/Addmedicines.html')
         else:
-                return render(request,'Healthcenter/MedicineRequest.html',{'medicine':medicinedata})
+                return render(request,'Healthcenter/Addmedicines.html',{'medicine':medicinedata})
 
 def deletepatient(request,id):
     tbl_patient.objects.get(id=id).delete()
     return redirect("Healthcenter:addpatient")
+
+def patientdischarge(request,id):
+        current_date = datetime.now()
+        patient=tbl_patient.objects.get(id=id)
+        patient.patient_vstatus=1
+        patient.patient_dischargedate=current_date
+        patient.save()
+        return redirect("Healthcenter:viewpatient")
+        
 
 def district(request):
     district_data=tbl_district.objects.all()
@@ -104,10 +122,35 @@ def ajaxward(request):
     ward = tbl_ward.objects.filter(panchayat_id=panchayat)
     return render(request,"Healthcenter/WardAjax.html",{"ward":ward })
 
-def foodrequest(request,fid):
-        patient=tbl_patient.objects.get(id=fid)
-        fooddata = tbl_foodrequest.objects.all()
-        tbl_foodrequest.objects.create(patient_id=patient)
-        return redirect("Healthcenter:viewpatient")
+# def foodrequest(request,fid):
+#         patient=tbl_patient.objects.get(id=fid)
+#         fooddata = tbl_foodrequest.objects.all()
+#         tbl_foodrequest.objects.create(patient_id=patient)
+#         return redirect("Healthcenter:viewpatient")
      
+def requestlist(request):
+        medicinedata=tbl_medicinerequest.objects.all()
+        return render(request,'Healthcenter/Viewrequests.html',{'medicine':medicinedata})
 
+def assigntask(request,id):
+        medicine=tbl_medicinerequest.objects.get(id=id)
+        tbl_tasklist.objects.create(task_title="Deliver Medicine",patient_name=medicine.user_id.user_name,patient_address=medicine.user_id.user_address,patient_ward=medicine.user_id.user_ward.ward_name,task_status=1)
+        return redirect("Healthcenter:requestlist")
+
+def PatientReport(request):
+        center=tbl_healthcenter.objects.get(id=request.session['cid'])
+        warddata=center.center_ward
+        if request.method == 'POST':
+                fromdate=request.POST.get('from_date')
+                todate=request.POST.get('to_date')
+                patient=tbl_patient.objects.filter(patient_admitdate__gte=fromdate,patient_admitdate__lte=todate,patient_ward=warddata.id,patient_vstatus=0)
+                return render(request,'Healthcenter/Report.html',{'data':patient})
+        else:
+                return render(request,'Healthcenter/Report.html')
+        
+def PatientcountReport(request):
+        center=tbl_healthcenter.objects.get(id=request.session['cid'])
+        warddata=center.center_ward
+        patient=tbl_patient.objects.filter(patient_ward=warddata.id,patient_vstatus=0).count()
+        discharged=tbl_patient.objects.filter(patient_ward=warddata.id,patient_vstatus=1).count()
+        return render(request,'Healthcenter/PatientCountReport.html',{'data':patient,'discharged':discharged})

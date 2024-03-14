@@ -87,3 +87,13 @@ def viewhealthcenters(request):
 def viewkitchens(request):
     kitchen = tbl_kitchencenter.objects.all()
     return render(request,'Admin/Viewkitchens.html',{'kitchen':kitchen})
+
+def report(request):
+        patient=tbl_patient.objects.all().count()
+        discharged=tbl_patient.objects.filter(patient_vstatus=1).count()
+        wardcount=tbl_ward.objects.all().count()
+        centercount=tbl_healthcenter.objects.all().count()
+        kitchencount=tbl_kitchencenter.objects.all().count()
+        print(centercount)
+        print(patient)
+        return render(request,'Admin/Report.html',{'data':patient,'discharged':discharged,'center':centercount,'wardcount':wardcount,'kitchencount':kitchencount})

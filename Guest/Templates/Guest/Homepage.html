@@ -1,11 +1,101 @@
+{% load static %}
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>SAFETRACK.</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <script src="script.js"></script>
 </head>
 <body>
-    Welcome to viroguard.
+    <div class="navbar">
+        <div class="logo">
+            <h3>SAFETRACK.</h3>
+        </div>
+        <div class="links">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Healthcentre</a></li>
+                <li><a href="#">Resources</a></li>
+                <li><a href="#">Prevention</a></li>
+            </ul>
+        </div>
+        <button class="signup">Signup</button>
+    </div>
+    <div class="homepage">
+        <div class="left">
+            <h1>LET’S CONTROL <br> VIRAL DISEASES</h1>
+            <h4>Subtitle</h4>
+            <button id="btn" onclick="onclick()" class="btn">BOOK CHECKUP</button>
+        </div>
+        <div class="heroimg">
+            <img src="" alt="">
+        </div>
+    </div>
+    <div class="quicklinks">
+        <a href="#">VACCINE</a>
+        <a href="#">COVID STATS</a>
+        <a href="#">HOSPITALS</a>
+        <a href="#">NEWS</a>
+        <a href="#">GUIDELINES</a>
+    </div>
+
+    <div class="page2">
+        <div class="img"></div>
+        <div class="content">
+            <h2>What is viral disease ?</h2>
+            <p>A virus is a microscopic organism and can be found in soil, water and even in other living organisms like humans, plants, animals, etc. Though a human body hosts viruses, not all become a cause of disease. 
+                The immune system is responsible for protecting human beings against diseases caused by viruses by producing antigens. Notably, these antibodies do not just identify infection but also destroy them effectively.</p>
+            <p>In simple words, these are infections or diseases caused by viruses. Now, the type of viral disease depends entirely on the virus that is causing it.
+                Often an infection caused by a virus can be fatal, while at other times the impact may not even be noticeable. Also, the same virus can affect different organisms in different ways. </p>
+            <a href="#" class="morebtn">Know more</a>
+        </div>
+    </div>
+    
+    <div class="page3">
+        <div class="titles">
+            <h1>What are the symptoms of viral diseases ?</h1>
+            <h5>Virus can cause a range of symptoms, ranging from mild illness to pneumonia. Symptoms of the disease </h5>
+            <h5>fever, cough, sore throat and headaches. In severe cases difficulty in breathing and deaths can occur. </h5>
+        </div>
+        <div class="img">
+
+        </div>
+    </div>
+
+    <div class="page4">
+        <div class="titles">
+            <h1>How to protect yourself from viral diseases</h1>
+            <h5>Protect yourself and others around you by knowing the facts and taking appropriate precautions. Follow advice provided by your local health authority. </h5>
+        </div>
+        <div class="img">
+
+        </div>
+    </div>
+    <!-- prefooter -->
+    <div class="prefooter">
+        <h1>Book Your Checkup</h1>
+        <a href="#">BOOK CHECKUP</a>
+    </div>
+    <!-- footer -->
+    <div class="footer">
+        <div class="flogo">
+            <h3><a href="#">SAFETRACK.</a></h3>
+        </div>
+        <div class="flinks">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Healthcentre</a></li>
+                <li><a href="#">Resources</a></li>
+                <li><a href="#">Prevention</a></li>
+            </ul>
+        </div>
+        <div class="copyright">
+            <p>©2024 Privacy — Terms</p>
+        </div>
+    </div>
+    
 </body>
 </html>

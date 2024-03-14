@@ -1,3 +1,8 @@
+{% extends 'Admin/Header.html' %}
+{% load static %}
+{% block content %}
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -8,10 +13,28 @@
   <body>
     <form method="post">
       {% csrf_token %}
-      <input placeholder="district" type="text" name="district" value="{{dis.district_name}}" />
-      <input type="submit" value="Submit" />
+      <div class="col-lg-6 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+      <table class="table">
+        <tr>
+          <td>District</td>
+          <td><input placeholder="district" type="text" name="district" value="{{dis.district_name}}" /></td>
+        </tr>
+        <tr>
+          <td colspan="2" align="center"><input type="submit" value="Submit" /></td>
+        </tr>
+      </table>
+    </div>
+    </div>
+  </div>
+      
+      
     </form>
-    <table border=1>
+    <div class="col-lg-6 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+    <table  class="table">
         <tr>
             <th>SI NO</th>
             <th>District</th>
@@ -26,5 +49,9 @@
         </tr>
         {%  endfor %}
     </table>
+  </div>
+  </div>
+</div>
   </body>
 </html>
+{% endblock content %}

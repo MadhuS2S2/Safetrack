@@ -1,3 +1,7 @@
+{% extends 'Admin/Header.html' %}
+{% load static %}
+{% block content %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +11,7 @@
 </head>
 <body>
     {% csrf_token %}
-    <table border=1 align="center">
+    <table border='1' cellpadding='10'>
         <tr>
             <td>SI NO</td>
             <td>Username</td>
@@ -26,8 +30,7 @@
             <td><a href="{% url 'Admin:reply' i.id %}">Reply</a></td>
         </tr>
         {%endfor%}
-    </table>
-
+    </table><br>
     <h2 align="center">Replied Complaints</h2>
     <table border="1" align="center">
         <tr>
@@ -51,3 +54,4 @@
     </table>
 </body>
 </html>
+{% endblock content %}

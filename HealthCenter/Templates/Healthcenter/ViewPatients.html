@@ -17,8 +17,6 @@
             <td>Discharge Date</td>
             <td>Ward</td>
             <td>Status</td>
-            <td>Medicine</td>
-            <td>Food</td>
             <td>Action</td>
         </tr>
         {%for i in patient%}
@@ -31,10 +29,14 @@
             <td>{{i.patient_dischargedate}}</td>
             <td>{{i.id}}</td>
             <td>{{i.patient_vstatus}}</td>
-            
             <td>
-                {% comment %} <a href="#">Edit</a> {% endcomment %}
-                <a href="{% url 'Healthcenter:deletepatient' i.id %}">Delete</a></td>
+                <a href="{% url 'Healthcenter:deletepatient' i.id %}">Delete</a>
+                {% if i.patient_vstatus == '0' %}
+            <a href="{% url 'Healthcenter:patientdischarge' i.id %}">Discharge</a>
+        {% else %}
+        Discharged
+    {% endif %}
+    </td>
         </tr>{%endfor%}
     </table>
 </body>

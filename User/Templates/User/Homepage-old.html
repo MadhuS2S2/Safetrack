@@ -1,0 +1,22 @@
+ {% comment %} Hello {{panchayat.panchayat_name}} {% endcomment %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    Welcome {{user.user_name}} <br> <br>
+    <a href="{% url 'User:homepage' %}">Home</a><br>
+    <a href="{% url 'User:userprofile'%}">View Profile</a> <br>
+    <a href="{% url 'User:editprofile' %}">Edit Profile</a> <br>
+    <a href="{% url 'User:changepassword' %}">Change Password</a> <br>
+    <a href="{% url 'User:usercomplaint' %}">Complaint</a> <br>
+    <a href="{% url 'User:userfeedback' %}">Feedback</a> <br>
+    <a href="{% url 'User:viewcomplaint' %}">View Complaints</a>  <br>
+    <a href="{% url 'User:medicinelist' %}">Medicine Request</a>  <br>
+    <a href="{% url 'User:foodlist' %}">Food Request</a>  <br>
+</body>
+</html>

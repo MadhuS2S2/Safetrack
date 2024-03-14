@@ -18,9 +18,11 @@ class tbl_userfeedback(models.Model):
 class tbl_medicinerequest(models.Model):
     medicine_prescription = models.CharField(max_length=30)
     medicine_date = models.DateField(auto_now_add=True)
-    patient_id=models.ForeignKey(tbl_patient,on_delete=models.CASCADE,null=True)
+    medicine_status = models.CharField(max_length=20)
+    user_id=models.ForeignKey(tbl_user,on_delete=models.CASCADE,null=True)
     
 class tbl_foodrequest(models.Model):
+    food_name = models.CharField(max_length=30)
     food_date = models.DateField(auto_now_add=True)
     food_status = models.CharField(max_length=20)
-    patient_id=models.ForeignKey(tbl_patient,on_delete=models.CASCADE,null=True)
+    user_id=models.ForeignKey(tbl_user,on_delete=models.CASCADE,null=True)

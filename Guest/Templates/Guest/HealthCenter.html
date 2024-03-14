@@ -8,27 +8,27 @@
 <body>
     <form action="" method="post" enctype="multipart/form-data">
         {%csrf_token%}
-        <input type="text" placeholder="Name" name="name" value="" ><br><br>
-        <select name="disdrop" id="disdrop">
+        <input required type="text" placeholder="Name" name="name" value="" ><br><br>
+        <select required name="disdrop" id="disdrop">
             <option value="">--Select--</option>
             {% for i in district%}
             <option value="{{i.id}}">{{i.district_name}}</option>
             {%endfor%}
         </select><br><br>
 
-        <select name="pandrop" id="pandrop">
+        <select required name="pandrop" id="pandrop">
             <option value="select">select</option>
         </select><br><br>
 
-        <select name="warddrop" id="warddrop">
+        <select required name="warddrop" id="warddrop">
             <option value="">select</option>
         </select><br><br>
 
-        <textarea type="text" placeholder="Address..." name="address" value=""></textarea><br><br>
+        <textarea required type="text" placeholder="Address..." name="address" value=""></textarea><br><br>
         Photo:<input type="file" name="photo" id=""><br><br>
-        Proof:<input type="file" name="proof" id=""><br><br>
-        <input type="email" placeholder="E-mail" name="email" value="" ><br><br>
-        <input type="password" placeholder="Password" name="password" value="" ><br><br>
+        Proof:<input required type="file" name="proof" id=""><br><br>
+        <input required type="email" placeholder="E-mail" name="email" value="" ><br><br>
+        <input required type="password" placeholder="Password" name="password" value="" ><br><br>
 
         <input type="submit" value="Submit">
         <input type="reset" value="Cancel">

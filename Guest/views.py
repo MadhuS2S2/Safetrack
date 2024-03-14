@@ -27,7 +27,7 @@ def user(request):
         
         tbl_user.objects.create(user_name=name,user_photo=photo,user_dob=dob,user_gender=gender,user_ward=ward,user_address=address,user_proof=proof,user_email=email,user_password=password)
         
-        return redirect("Guest/Login.html")        
+        return redirect("Guest:login")          
     else:
         return render(request,'Guest/User.html',{'user': user_data,'district': district_data,'panchayat': panchayat_data,'ward':ward_data})
 

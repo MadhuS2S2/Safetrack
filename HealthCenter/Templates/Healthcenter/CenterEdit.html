@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+ {% comment %} <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit centre</title>
+    <title>Edit center</title>
 </head>
 <body>
     
@@ -12,27 +12,27 @@
     <table border=1>
         <tr>
             <td>Photo</td>
-            <td><img src="{{ centre.center_photo.url }}" width='150' height='150' alt=""></td>
+            <td><img src="{{ center.center_photo.url }}" width='150' height='150' alt=""></td>
         </tr>
         <tr>
             <td>Name</td>
-            <td><input type="text" name="name" value="{{centre.center_name}}" ></td>
+            <td><input type="text" name="name" value="{{center.center_name}}" ></td>
         </tr>
         <tr>
             <td>Address</td>
-            <td><input type="text" name="address" value="{{centre.center_address}}" ></td>
+            <td><input type="text" name="address" value="{{center.center_address}}" ></td>
         </tr>
         <tr>
             <td>Email</td>
-            <td><input type="email" name="email" value="{{centre.center_email}}" ></td>
+            <td><input type="email" name="email" value="{{center.center_email}}" ></td>
         </tr>
         <tr>
             <td>Password</td>
-            <td><input type="password" name="password" value="{{centre.center_password}}" ></td>
+            <td><input type="password" name="password" value="{{center.center_password}}" ></td>
         </tr>
         <tr>
             <td>Ward</td>
-            <td><input type="text" name="district" value="{{centre.center_ward.ward_name}}" ></td>
+            <td><input type="text" name="district" value="{{center.center_ward.ward_name}}" ></td>
         </tr>
         <tr>
             <td>
@@ -43,4 +43,97 @@
     </table>
 </form>
 </body>
-</html>
+</html> {% endcomment %}
+
+
+<!--Website: wwww.codingdung.com-->
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodingDung | Profile Template</title>
+    <link rel="stylesheet" href="{% static 'style.css'%}">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container light-style flex-grow-1 container-p-y">
+        <h4 class="font-weight-bold py-3 mb-4">
+           Edit Profile
+        </h4>
+        <div class="card overflow-hidden">
+            <div class="row no-gutters row-bordered row-border-light">
+                <div class="col-md-3 pt-0">
+                    <div class="list-group list-group-flush account-settings-links">
+                        <a class="list-group-item list-group-item-action " 
+                            href="{% url 'Healthcenter:centreprofile'%}">General</a>
+                        <a class="list-group-item list-group-item-action active" 
+                            href="{% url 'Healthcenter:centreedit'%}">edit Profile</a>
+                        <a class="list-group-item list-group-item-action" 
+                            href="{% url 'Healthcenter:changepassword'%}">Change password</a>
+                        <a class="list-group-item list-group-item-action" 
+                            href="#account-notifications">Notifications</a>
+                        <a class="list-group-item list-group-item-action" 
+                            href="#account-notifications">Log Out</a>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="tab-content">
+                        <div class="tab-pane fade active show" id="account-general">
+                            <form action="" method="post">
+                                {% csrf_token %}
+                                <div class="card-body media align-items-center">
+                                    <img src="{{center.center_photo.url}}" alt
+                                        class="col-md-2 ">
+                                    <div class="media-body ml-8">
+                                        <label class="btn btn-outline-primary">
+                                            Upload new photo
+                                            <input type="file" name="photo" class="account-settings-fileinput">
+                                        </label>
+                                        <div class="text-light small mt-1">Allowed JPG, GIF or PNG. Max size of 800K</div>
+                                    </div> 
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label class="form-label">Username</label>
+                                        <input name="name" type="text" class="form-control mb-1" value="{{center.center_name}}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Address</label>
+                                        <input name="address" type="text" class="form-control" value="{{center.center_address}}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Ward</label>
+                                        <input name="ward" type="number" class="form-control" value="{{center.center_ward.ward_name}}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Contact</label>
+                                        <input name="phone" type="number" class="form-control" value="4879134644">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">E-mail</label>
+                                        <input name="email" type="text" class="form-control mb-1" value="{{center.center_email}}">
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <input type="Submit" class="btn btn-primary" value="Save Changes">&nbsp;
+                                    <input type="reset" class="btn btn-default" value="Cancel">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript">
+
+    </script>
+</body>
+
+</html> 
