@@ -1,69 +1,121 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User</title>
-</head>
-<body>
-    <form action="" method="post">
-        {%csrf_token%}
-        <input required type="text" placeholder="Name" name="name" value="" ><br><br>
-        {% comment %} <input required type="date" placeholder="" name="dob" value="" ><br><br> {% endcomment %}
+{% load static %}
+<html>
+  <head>
+    <title>WARDMEMBER REGISTER</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'signup.css'%}" />
+    <style>
+        select {
+            padding-left:60px
+        }
+    </style>
+  </head>
+  <body>
+    <h2>REGISTER</h2>
+    <form action="" method="post" enctype="multipart/form-data">
+      {%csrf_token%}
 
-        Male<input required type="radio" name="gender" value="male">
-        Female<input required type="radio" name="gender" value="female"><br><br>
-        
-        <select required name="disdrop" id="disdrop">
-            <option value="">--Select--</option>
-            {% for i in district%}
-            <option value="{{i.id}}">{{i.district_name}}</option>
-            {%endfor%}
-        </select><br><br>
+      <div>
+        <input
+          type="text"
+          name="name"
+          id="firstname"
+          placeholder=" "
+          required
+        />
+        <label for="firstname">First name</label>
+      </div>
 
-        <select required name="pandrop" id="pandrop">
-            <option value="select">select</option>
-        </select><br><br>
+      <select required name="gender" id="gender">
+        <option value="">Gender</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+      </select>
 
-        <select required name="warddrop" id="warddrop">
-            <option value="">select</option>
-        </select><br><br>
+      <div>
+        <textarea
+          name="address"
+          id=""
+          cols="20"
+          name="address"
+          rows="10"
+          placeholder="Address"
+        ></textarea>
+        {% comment %} <label for="address">Address</label> {% endcomment %}
+      </div>
 
-        <textarea required type="text" placeholder="Address..." name="address" value=""></textarea><br><br>
-        photo:<input required type="file" name="photo" id=""><br><br>
-        proof:<input required type="file" name="proof" id=""><br><br>
-        <input required type="email" placeholder="E-mail" name="email" value="" ><br><br>
-        <input required type="password" placeholder="Password" name="password" value="" ><br><br>
+      <select required class="disdrop" name="disdrop" id="disdrop">
+        <option value="">District</option>
+        {% for i in district%}
+        <option value="{{i.id}}">{{i.district_name}}</option>
+        {%endfor%}
+      </select>
 
-        <input type="submit" value="Submit">
-        <input type="reset" value="Cancel">
+      <select required class="pandrop" name="pandrop" id="pandrop">
+        <option value="select">Panchayat</option>
+      </select>
 
+      <select required class="warddrop" name="warddrop" id="warddrop">
+        <option value="">Ward</option>
+      </select>
+
+      <div>
+        <input
+          type="tel"
+          name="contact"
+          id="tel"
+          placeholder=" "
+          pattern="^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$"
+          required
+        />
+        <label for="tel">Phone No.</label>
+        <div class="requirements">Must be a valid Phone Number!</div>
+      </div>
+      <div>
+        <input type="email" name="email" id="email" placeholder=" " required />
+        <label for="email">Email</label>
+        <div class="requirements">Must be a valid email addres!</div>
+      </div>
+      <div>
+        <input
+          type="password"
+          name="password"
+          id="password"
+          placeholder=" "
+          pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
+          required
+        />
+        <label for="password">Password</label>
+        <div class="requirements">Must be a valid password!</div>
+      </div>
+      <input type="submit" value="Sign up" />
     </form>
-</body>
+  </body>
 </html>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
-    $("#disdrop").change(function () {
-        var did = $(this).val();
-        var ur = "{% url 'Guest:ajaxpan' %}"
-        $.ajax({
-            url: ur,
-            data: { did: did, },
-            success: function (data) {
-                $("#pandrop").html(data);
-            },
-        });
+  $("#disdrop").change(function () {
+    var did = $(this).val();
+    var ur = "{% url 'Guest:ajaxpan' %}";
+    $.ajax({
+      url: ur,
+      data: { did: did },
+      success: function (data) {
+        $("#pandrop").html(data);
+      },
     });
+  });
 
-    $("#pandrop").change(function () {
-        var did = $(this).val();
-        var ur = "{% url 'Guest:ajaxward' %}"
-        $.ajax({
-            url: ur,
-            data: { did: did, },
-            success: function (data) {
-                $("#warddrop").html(data);
-            },
-        });
+  $("#pandrop").change(function () {
+    var did = $(this).val();
+    var ur = "{% url 'Guest:ajaxward' %}";
+    $.ajax({
+      url: ur,
+      data: { did: did },
+      success: function (data) {
+        $("#warddrop").html(data);
+      },
     });
-    </script> 
+  });
+</script>

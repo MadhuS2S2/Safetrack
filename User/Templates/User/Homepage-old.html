@@ -10,9 +10,9 @@
 <body>
     Welcome {{user.user_name}} <br> <br>
     <a href="{% url 'User:homepage' %}">Home</a><br>
-    <a href="{% url 'User:userprofile'%}">View Profile</a> <br>
-    <a href="{% url 'User:editprofile' %}">Edit Profile</a> <br>
-    <a href="{% url 'User:changepassword' %}">Change Password</a> <br>
+    {% comment %} <a href="{% url 'User:userprofile'%}">View Profile</a> <br> {% endcomment %}
+    {% comment %} <a href="{% url 'User:editprofile' %}">Edit Profile</a> <br> {% endcomment %}
+    {% comment %} <a href="{% url 'User:changepassword' %}">Change Password</a> <br> {% endcomment %}
     <a href="{% url 'User:usercomplaint' %}">Complaint</a> <br>
     <a href="{% url 'User:userfeedback' %}">Feedback</a> <br>
     <a href="{% url 'User:viewcomplaint' %}">View Complaints</a>  <br>

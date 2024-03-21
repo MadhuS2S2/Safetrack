@@ -15,14 +15,26 @@ def home_page(request):
 def memberedit(request):
         member = tbl_wardmember.objects.get(id=request.session['mid'])
         if request.method == 'POST':
-                member.member_name = request.POST.get('name')
-                member.member_gender = request.POST.get('gender')
-                member.member_address = request.POST.get('address')
-                member.member_ward = request.POST.get('ward')
-                member.member_email = request.POST.get('email')
-                member.member_proof= request.POST.get('proof')
-                member.save()
-                return render(request,'Ward/MemberEdit.html',{'member':member})
+                ward=tbl_ward.objects.get(id=request.POST.get('ward')) 
+                if request.FILES.get('photo'):
+                        member.member_photo=request.FILES.get('photo')
+                        member.member_name = request.POST.get('name')
+                        member.member_gender = request.POST.get('gender')
+                        member.member_address = request.POST.get('address')
+                        member.member_ward = ward
+                        member.member_email = request.POST.get('email')
+                        # member.member_proof= request.POST.get('proof')
+                        member.save()
+                        return redirect('Ward:memberprofile')
+                else:
+                        member.member_name = request.POST.get('name')
+                        member.member_gender = request.POST.get('gender')
+                        member.member_address = request.POST.get('address')
+                        member.member_ward = ward
+                        member.member_email = request.POST.get('email')
+                        # member.member_proof= request.POST.get('proof')
+                        member.save()
+                        return redirect('Ward:memberprofile')
         else:
                 return render(request,'Ward/MemberEdit.html',{'member':member})
 

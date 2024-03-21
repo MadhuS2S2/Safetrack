@@ -29,6 +29,50 @@
       <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+      <style>
+         .dropdown {
+            position: relative;
+            display: inline-block;
+          }
+          
+          .dropdown .submenu {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            right:0;
+          }
+          
+          .dropdown .submenu a {
+            {% comment %} padding: 12px 16px; {% endcomment %}
+            display: block;
+            color: #333;
+            text-decoration: none;
+          }
+          
+          .dropdown .submenu a:hover {
+            background-color: #f1f1f1;
+          }
+          
+          .dropdown a {
+            {% comment %} padding: 5px ; {% endcomment %}
+            display: block;
+            color: black;
+            text-decoration: none;
+          }
+          
+          .dropdown a:hover {
+            {% comment %} background-color: #ddd; {% endcomment %}
+          }
+          
+          .dropdown a i {
+            margin-left: 5px;
+          }
+          
+          
+      </style>
    </head>
    <!-- body -->
    <body class="main-layout">
@@ -40,31 +84,61 @@
       <!-- top -->
                     <!-- header -->
          <header class="header-area">
-            <div class="left">
-               <a href="Javascript:void(0)"><i class="fa fa-search" aria-hidden="true"></i></a>
-            </div>
-            <div class="right">
-               <a href="Javascript:void(0)"><i class="fa fa-user" aria-hidden="true"></i></a>
-            </div>
+            
+            {% comment %} <div class="right">
+               <a href="javascript:void(0)" onclick="toggleDropdown()">
+                 <i class="fa fa-user" aria-hidden="true"></i>
+               </a>
+               <div class="dropdown" id="dropdown">
+                 <a href="#">Sign Up</a>
+                 <a href="#">Register
+                  <div class="dropdown" id="dropdown">
+                     <a href="#">Healthcenter</a>
+                     <a href="#">kitchencenter</a>
+                     <a href="#">Ward Member</a>
+                     <a href="#">Ashaworker</a>
+                     <a href="#">User/</a>
+                   </div>
+                 </a>
+               </div>
+             </div> {% endcomment %}
+
+             <div class="right">
+               <div class="dropdown">
+                 <a href="javascript:void(0)" onclick="toggleDropdown('submenu1')">
+                 <i class="fa fa-user" aria-hidden="true"></i>
+                 </a>
+                 <div class="submenu" id="submenu1">
+                   <a href="{% url 'Guest:login'%}">Sign Up</a>
+                   {% comment %} <a href="#">Register</a> {% endcomment %}
+                   <a href="javascript:void(0)" onclick="toggleDropdown('submenu2')">Register <i class="fa fa-caret-right"></i></a>
+                   <div class="submenu" id="submenu2">
+                     <a href="{% url 'Guest:healthcenter' %}">Healthcenter</a>
+                     <a href="{% url 'Guest:ashaworker' %}">Ashaworker</a>
+                     <a href="{% url 'Guest:kitchencenter' %}">kitchencenter</a>
+                     <a href="{% url 'Guest:wardmember' %}">Wardmember</a>
+                     <a href="{% url 'Guest:user' %}">User/Patient</a>
+                   </div>
+                 </div>
+               </div>
+             </div>
+             
+             
             <div class="container">
                <div class="row d_flex">
-                  <div class="col-sm-3 logo_sm">
-                     <div class="logo">
-                        <a href="index.html"></a>
-                     </div>
-                  </div>
+                  
                   <div class="col-lg-10 offset-lg-1 col-md-12 col-sm-9">
                      <div class="navbar-area">
                         <nav class="site-navbar">
                            <ul>
-                              <li><a class="active" href="index.html">Home</a></li>
-                              <li><a href="about.html">About</a></li>
-                              <li><a href="action.html">take action</a></li>
-                              <li><a href="index.html" class="logo_midle">SAFETRACK</a></li>
-                              <li><a href="news.html">news</a></li>
-                              <li><a href="doctores.html">doctores</a></li>
-                               
-                              <li><a href="contact.html">Contact </a></li>
+                              <li> <strong><a href="#" >SAFETRACK</a></strong></li>
+                           </ul>
+                           <ul>
+                              <li><a class="active" href="#">Home</a></li>
+                              <li><a href="#about">About</a></li>
+                              <li><a href="#protect">Prevention</a></li>
+                              {% comment %} <li><a href="#">news</a></li> {% endcomment %}
+                              <li><a href="#contact">Contact </a></li>
                            </ul>
                            <button class="nav-toggler">
                            <span></span>
@@ -81,11 +155,6 @@
          <div class="section">
             <!-- carousel code -->
             <div id="banner1" class="carousel slide slider_main">
-               <ol class="carousel-indicators ">
-                  <li data-target="#banner1" data-slide-to="0" class="indicator-li-1">01</li>
-                  <li data-target="#banner1" data-slide-to="1" class="">02</li>
-                  <li data-target="#banner1" data-slide-to="2" class="active">03</li>
-               </ol>
                <div class="carousel-inner">
                   <!-- first slide -->
                   <div class="carousel-item active">
@@ -94,9 +163,8 @@
                            <div class="row">
                               <div class="col-md-8">
                                  <div class="photog">
-                                    <h1>Care early<br>Coronavirus</h1>
+                                    <h1>Let's Control <br> Viral Diseases</h1>
                                     <a class="read_more" href="javascript:void(0)" >Read More</a>
-                                    <a class="read_more" href="about.html" >About Us</a>
                                  </div>
                               </div>
                            </div>
@@ -110,9 +178,9 @@
                            <div class="row">
                               <div class="col-md-8">
                                 <div class="photog">
-                                    <h1>Care early<br>Coronavirus</h1>
+                                    <h1>Care early<br>Viral Diseases</h1>
                                     <a class="read_more" href="javascript:void(0)" >Read More</a>
-                                    <a class="read_more" href="about.html" >About Us</a>
+                                    <a class="read_more" href="#" >About Us</a>
                                  </div>
                               </div>
                            </div>
@@ -126,9 +194,9 @@
                            <div class="row">
                               <div class="col-md-8">
                                 <div class="photog">
-                                    <h1>Care early<br>Coronavirus</h1>
+                                    <h1>Care early<br>Viral Diseases</h1>
                                     <a class="read_more" href="javascript:void(0)" >Read More</a>
-                                    <a class="read_more" href="about.html" >About Us</a>
+                                    <a class="read_more" href="#" >About Us</a>
                                  </div>
                               </div>
                            </div>
@@ -136,29 +204,20 @@
                      </div>
                   </div>
                </div>
-               <!-- controls -->
-               <a class="carousel-control-prev" href="#banner1" role="button" data-slide="prev">
-               <i class="fa fa-angle-left" aria-hidden="true"></i>
-               <span class="sr-only">Previous</span>
-               </a>
-               <a class="carousel-control-next" href="#banner1" role="button" data-slide="next">
-               <i class="fa fa-angle-right" aria-hidden="true"></i>
-               <span class="sr-only">Next</span>
-               </a>
+               
             </div>
          </div>
       </div>
       <!-- end banner -->
       <!-- about -->
-      <div class="about">
+      <div class="about" id="about">
          <div class="container_width">
             <div class="row d_flex">
                    <div class="col-md-7">
                   <div class="titlepage text_align_left">
                      <h2>About Viral Diseases </h2>
-                     <p>English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for
-                     </p>
-                     <a class="read_more" href="about.html">About More</a>
+                     <p>Viral diseases are infections caused by viruses. Different types of viruses cause different infections. Common cold is the most common type of viral infection that is caused by infections in the respiratory tract.</p>
+                     <a class="read_more" href="#">Know More</a>
                   </div>
                </div>
                <div class="col-md-5">
@@ -172,7 +231,7 @@
       </div>
       <!-- end about -->
      <!-- coronata -->
-      <div class="coronata">
+      <div class="coronata" id='about'>
          <div class="container">
             <div class="row d_flex grid">
                <div class="col-md-7">
@@ -182,10 +241,13 @@
                </div>
                <div class="col-md-5 oder1">
                   <div class="titlepage text_align_left">
-                     <h2>Coronavirus what it is?</h2>
-                     <p>when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using
-                     </p>
-                     <a class="read_more" href="coronata.html">About More</a>
+                     <h2>Symptoms of Viral diseases?</h2>
+                     <p>Viral diseases are extremely widespread infections caused by viruses, a type of microorganism.
+                        There are many types of viruses that cause a wide variety of viral diseases. The most common type
+                         of viral disease is the common cold, which is caused by a viral infection of the upper respiratory 
+                        tract (nose and throat). </p>
+                     
+                     <a class="read_more" href="#">Read More</a>
                   </div>
                </div>
             </div>
@@ -194,7 +256,7 @@
       <!-- end coronata -->
    
         <!-- protect -->
-      <div class="protect">
+      <div class="protect" id="protect">
          <div class="container">
             <div class="row">
                <div class="col-md-12">
@@ -206,8 +268,8 @@
                </div>
             </div>
          </div>
-           <div class="protect_bg">
-         <div class="container">
+         <div class="protect_bg">
+            <div class="container">
              <div class="row">
                <div class="col-md-12">
                   <!--  Demos -->
@@ -239,7 +301,7 @@
                            <h3> Stay at Home</h3>
                            <span> Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for</span>
                           </div>
-                           <a class="read_more" href="protect.html">Read More</a>
+                           <a class="read_more" href="#">Read More</a>
                         </div>
                      </div>
                   </div>
@@ -251,7 +313,7 @@
       </div>
       <!-- end protect -->
     <!-- cases -->
-      <div class="cases">
+      {% comment %} <div class="cases">
          <div class="container-fluid">
             <div class="row">
                <div class="col-md-12">
@@ -265,7 +327,7 @@
                <div class=" col-md-4">
                   <div class="latest text_align_center">
                      <figure><img src="{% static 'Guest/images/cases1.png' %}" alt="#"/></figure>
-                      <a class="read_more" href="cases.html">Read More</a>
+                      <a class="read_more" href="#">Read More</a>
                      <div class="nostrud">
                         <h3>Cases 01</h3>
                         <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look</p>
@@ -274,8 +336,8 @@
                </div>
                <div class=" col-md-4">
                   <div class="latest text_align_center">
-                     <figure><img src="images/cases2.png" alt="#"/></figure>
-                      <a class="read_more" href="cases.html">Read More</a>
+                     <figure><img src="{% static 'Guest/images/cases2.png'%}" alt="#"/></figure>
+                      <a class="read_more" href="#">Read More</a>
                      <div class="nostrud">
                         <h3>Cases 02</h3>
                         <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look</p>
@@ -284,8 +346,8 @@
                </div>
                <div class=" col-md-4">
                   <div class="latest text_align_center">
-                     <figure><img src="images/cases3.png" alt="#"/></figure>
-                      <a class="read_more" href="cases.html">Read More</a>
+                     <figure><img src="{% static 'Guest/images/cases3.png'%}" alt="#"/></figure>
+                      <a class="read_more" href="#">Read More</a>
                      <div class="nostrud">
                         <h3>Cases 03</h3>
                         <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look</p>
@@ -294,7 +356,7 @@
                </div>
             </div>
          </div>
-      </div>
+      </div> {% endcomment %}
       <!-- end cases -->
          <!-- doctors -->
       <div class="doctors">
@@ -328,7 +390,7 @@
       </div>
       <!-- end cases -->
 <!-- update -->
-<div class="update">
+<div class="update" id="contact">
    <div class="cevery_white">
       <div class="container">
          <div class="row">
@@ -363,53 +425,32 @@
                            <div class="hedingh3 text_align_left">
                               <h3>Resources</h3>
                               <ul class="menu_footer">
-                                 <li><a href="index.html">Home</a><li>
+                                 <li><a href="#">Home</a><li>
                                  <li><a href="javascript:void(0)">What we do</a><li>
                                  <li> <a href="javascript:void(0)">Media</a><li>
                                  <li> <a href="javascript:void(0)">Travel Advice</a><li>
                                  <li><a href="javascript:void(0)">Protection</a><li>
                                  <li><a href="javascript:void(0)">Care</a><li>
                               </ul>
-                             
-           
                            </div>
                         </div>
-                        <div class="col-lg-3 col-md-6 col-sm-6">
-                           <div class="hedingh3 text_align_left">
-                             <h3>About</h3>
-                              <p>Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various</p>
-                           </div>
-                        </div>
-                     
-                
                        
-                        <div class="col-lg-3 col-md-6 col-sm-6">
+                        {% comment %} <div class="col-lg-3 col-md-6 col-sm-6">
                            <div class="hedingh3  text_align_left">
                               <h3>Contact  Us</h3>
-                                <ul class="top_infomation">
-                        <li><i class="fa fa-map-marker" aria-hidden="true"></i>
-                           Making this the first true  
-                        </li>
-                        <li><i class="fa fa-phone" aria-hidden="true"></i>
-                           Call : +01 1234567890
-                        </li>
-                        <li><i class="fa fa-envelope" aria-hidden="true"></i>
-                           <a href="Javascript:void(0)">Email : demo@gmail.com</a>
-                        </li>
-                     </ul>
-                            
-                           
-                     </div>
-                  </div>
-                     <div class="col-lg-4 col-md-6 col-sm-6">
-                           <div class="hedingh3 text_align_left">
-                              <h3>countrys</h3>
-                              <div class="map">
-                                <img src="images/map.png" alt="#"/>
-                              </div>
+                              <ul class="top_infomation">
+                                 <li><i class="fa fa-map-marker" aria-hidden="true"></i>
+                                    Making this the first true  
+                                 </li>
+                                 <li><i class="fa fa-phone" aria-hidden="true"></i>
+                                    Call : +01 1234567890
+                                 </li>
+                                 <li><i class="fa fa-envelope" aria-hidden="true"></i>
+                                    <a href="Javascript:void(0)">Email : demo@gmail.com</a>
+                                 </li>
+                              </ul>
                            </div>
-                        </div>
-                    
+                        </div> {% endcomment %}
                </div>
             </div>
             <div class="copyright">
@@ -425,10 +466,21 @@
       </footer>
       <!-- end footer -->
       <!-- Javascript files-->
-      <script src="js/jquery.min.js"></script>
-      <script src="js/bootstrap.bundle.min.js"></script>
+      <script src="{% static 'Guest/js/jquery.min.js'%}"></script>
+      <script src="{% static 'Guest/js/bootstrap.bundle.min.js'%}"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
-      <script src="js/owl.carousel.min.js"></script>
-      <script src="js/custom.js"></script>
+      <script src="{% static 'Guest/js/owl.carousel.min.js'%}"></script>
+      <script src="{% static 'Guest/js/custom.js'%}"></script>
+      <script>
+         function toggleDropdown(submenuId) {
+            var submenu = document.getElementById(submenuId);
+            if (submenu.style.display === "block") {
+              submenu.style.display = "none";
+            } else {
+              submenu.style.display = "block";
+            }
+          }
+          
+      </script>
    </body>
 </html>

@@ -1,51 +1,17 @@
-{% comment %} <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User</title>
-</head>
-<body>
-    <form action="" method="post" enctype="multipart/form-data">
-        {%csrf_token%}
-        <input required type="text" placeholder="Name" name="name" value="" ><br><br>
-        <select required name="disdrop" id="disdrop">
-            <option value="">--Select--</option>
-            {% for i in district%}
-            <option value="{{i.id}}">{{i.district_name}}</option>
-            {%endfor%}
-        </select><br><br>
-
-        <select required name="pandrop" id="pandrop">
-            <option value="select">select</option>
-        </select><br><br>
-
-        <select required name="warddrop" id="warddrop">
-            <option value="">select</option>
-        </select><br><br>
-
-        <textarea required type="text" placeholder="Address..." name="address" value=""></textarea><br><br>
-        Photo:<input type="file" name="photo" id=""><br><br>
-        Proof:<input required type="file" name="proof" id=""><br><br>
-        <input required type="email" placeholder="E-mail" name="email" value="" ><br><br>
-        <input required type="password" placeholder="Password" name="password" value="" ><br><br>
-
-        <input type="submit" value="Submit">
-        <input type="reset" value="Cancel">
-
-    </form>
-</body>
-</html> {% endcomment %}
-
 <!DOCTYPE html>
 {% load static %}
 <html>
   <head>
     <title>REGISTER</title>
     <link rel="stylesheet" type="text/css" href="{% static 'signup.css'%}" />
+    <style>
+      select {
+          padding-left:60px
+      }
+  </style>
   </head>
   <body>
-    <h2>REGISTER</h2>
+    <h2>HEALTHCENTER REGISTER</h2>
     <form  action="" method="post" enctype="multipart/form-data">
       {%csrf_token%}
       

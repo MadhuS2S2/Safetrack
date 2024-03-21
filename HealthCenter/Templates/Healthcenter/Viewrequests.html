@@ -1,24 +1,94 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Add Medicines</title>
+    <link rel="stylesheet" href="{% static 'assets/css/fontawesome.css'%}">
+    <link rel="stylesheet" href="{% static 'assets/css/templatemo-woox-travel.css'%}">
+    <link rel="stylesheet" href="{% static 'assets/css/owl.css'%}">
+    <link rel="stylesheet" href="{% static 'assets/css/animate.css'%}">
+    <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+     <!-- Bootstrap core CSS -->
+     <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+     <!-- Additional CSS Files -->
+     <link rel="stylesheet" href="{% static 'assets/css/fontawesome.min.css' %}">
+    
+     <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
 </head>
 <body>
-    {% csrf_token %}
+    {% comment %} <form action="" method="post">
+        {% csrf_token %}
+        <textarea required name="prescription" id="" cols="30" rows="10">Prescription...</textarea><br><br>
+        <input type="submit" value="Save">
+        <input type="reset" value="Cancel"><br><br>
+    </form>
+
     <table border='1'>
         <tr>
             <td>SI NO</td>
-            <td>Patient Name</td>
-            <td>Ward</td>
-            <td>Address</td>
             <td>Prescription</td>
             <td>Date</td>
-            <td>Action</td>
-            <td>Assign</td>
         </tr>
         {%for i in medicine%}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.medicine_prescription}}</td>
+            <td>{{i.medicine_date}}</td>
+        </tr>
+        {%endfor%}
+    </table> {% endcomment %}
+    <header class="header-area header-sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav">
+                        <!-- ***** Logo Start ***** -->
+                        <a href="index.html" class="logo" style="margin-left:-5px">
+                            <img src="{% static 'assets/images/logo.png'%}" alt=""> 
+                        </a> 
+                        <!-- ***** Logo End ***** -->
+                        <!-- ***** Menu Start ***** -->
+                        <ul class="nav" style="margin-left:-30px">
+                            <li><a href="{% url 'Healthcenter:homepage'%}" >Home</a></li>
+                            <li><a href="{% url 'Healthcenter:addpatient'%}">Add Patient</a></li>
+                            <li><a href="{% url 'Healthcenter:addmedicines'%}">Add Medicines</a></li>
+                            <li><a href="{% url 'Healthcenter:requestlist'%}" class="active">View Medicine Requests</a></li>
+                            <li><a href="{% url 'Healthcenter:centreprofile'%}"> <i class="fa fa-user"></i></a></li>
+                            
+                        </ul>   
+                        <a class='menu-trigger'>
+                            <span>Menu</span>
+                        </a>
+                        <!-- ***** Menu End ***** -->
+                    </nav>
+                </div>
+            </div>
+        </div>
+      </header>
+     
+<div style="background-color:white; margin-top:150px">
+
+<div class="m-4"style="padding:100px" >
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <td>SI NO</td>
+                <td>Patient Name</td>
+                <td>Ward</td>
+                <td>Address</td>
+                <td>Prescription</td>
+                <td>Date</td>
+                {% comment %} <td>Action</td> {% endcomment %}
+                <td>Worker</td>
+                <td>Status</td>
+            </tr>
+        </thead>
+        <tbody>
+            {%for i in medicine%}
         <tr>
             <td>{{forloop.counter}}</td>
             <td>{{i.user_id.user_name}}</td>
@@ -26,10 +96,13 @@
             <td>{{i.user_id.user_address}}</td>
             <td>{{i.medicine_prescription}}</td>
             <td>{{i.medicine_date}}</td>
-            <td><a href="#">Accept</a></td>
-            <td><a href="{% url 'Healthcenter:assigntask' i.id%}">Worker</a></td>
+            {% comment %} <td><a href="#">Accept</a></td> {% endcomment %}
+            <td><a href="{% url 'Healthcenter:assigntask' i.id%}">Assign</a></td>
         </tr>
         {%endfor%}
+        </tbody>
     </table>
+</div>
+</div>
 </body>
 </html>

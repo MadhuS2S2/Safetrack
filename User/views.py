@@ -11,16 +11,25 @@ def userprofile(request):
 def editprofile(request):
         user = tbl_user.objects.get(id=request.session['uid'])
         if request.method == 'POST':
-                user.user_photo=request.POST.get('profile')
-                user.user_name = request.POST.get('name')
-                user.user_dob = request.POST.get('dob')
-                user.user_gender = request.POST.get('gender')
-                user.user_address = request.POST.get('address')
-                user.user_ward.ward_name = request.POST.get('ward')
-                user.user_email = request.POST.get('email')
-                user.user_proof= request.POST.get('proof')
-                user.save()
-                return redirect("User:userprofile")
+                if request.FILES.get('photo'):
+                        user.user_photo=request.FILES.get('photo')
+                        user.user_name = request.POST.get('name')
+                        user.user_dob = request.POST.get('dob')
+                        user.user_gender = request.POST.get('gender')
+                        # user.centre_contact=request.POST.get('contact')
+                        user.user_email = request.POST.get('email')
+                        user.user_ward.ward_name=request.POST.get('ward')
+                        user.save()
+                        return redirect('User:userprofile')
+                else:
+                        user.user_name = request.POST.get('name')
+                        user.user_dob = request.POST.get('dob')
+                        user.user_gender = request.POST.get('gender')
+                        # user.centre_contact=request.POST.get('contact')
+                        user.user_email = request.POST.get('email')
+                        user.user_ward.ward_name=request.POST.get('ward')
+                        user.save()
+                        return redirect('User:userprofile')
         else:
                 return render(request,'User/UserEdit.html',{'user':user})
 
@@ -81,7 +90,7 @@ def deletecomplaint(request,id):
 def medicinelist(request):
         user=tbl_user.objects.get(id=request.session['uid'])
         wardid=user.user_ward
-        medicinedata=tbl_medicinelist.objects.filter(Healthcenter__center_ward=wardid)
+        medicinedata=tbl_medicinelist.objects.filter(Healthuser__user_ward=wardid)
         return render(request,'User/Medicinelist.html',{'medicine':medicinedata})
 
 def foodlist(request):

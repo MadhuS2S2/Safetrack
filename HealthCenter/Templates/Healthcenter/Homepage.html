@@ -1,29 +1,4 @@
-{% comment %} Hello {{panchayat.panchayat_name}} {% endcomment %}
-
-{% comment %} <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    Welcome {{centre.center_name}} <br> <br>
-    <a href="{% url 'Healthcenter:homepage' %}">Home</a><br>
-    <a href="{% url 'Healthcenter:centreprofile'%}">View Profile</a> <br>
-    <a href="{% url 'Healthcenter:centreedit' %}">Edit Profile</a> <br>
-    <a href="{% url 'Healthcenter:changepassword' %}">Change Password</a> <br>
-    <a href="{% url 'Healthcenter:addpatient' %}">Add Patient</a> <br>
-    <a href="{% url 'Healthcenter:viewpatient' %}">View Patients</a> <br>
-    <a href="{% url 'Healthcenter:addmedicines'%}">Medicine List</a> <br>
-    <a href="{% url 'Healthcenter:requestlist'%}">Medicine Request List</a> <br>
-    <a href="{% url 'Healthcenter:PatientReport'%}">Patient Report</a> <br>
-    <a href="{% url 'Healthcenter:PatientcountReport'%}">Patient count Report</a> <br>
-
-</body>
-</html> {% endcomment %}
-
-{%load static%}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,13 +12,13 @@
     <title>Safe Track</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css'%}" rel="stylesheet">
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
 
     <!-- Additional CSS Files -->
-    <link rel="stylesheet" href="{% static 'assets/css/fontawesome.css'%}">
-    <link rel="stylesheet" href="{% static 'assets/css/templatemo-woox-travel.css'%}">
-    <link rel="stylesheet" href="{% static 'assets/css/owl.css'%}">
-    <link rel="stylesheet" href="{% static 'assets/css/animate.css'%}">
+    <link rel="stylesheet" href="{% static 'assets/css/fontawesome.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/templatemo-woox-travel.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/owl.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/animate.css' %}">
     <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
 <!--
 
@@ -77,10 +52,10 @@ https://templatemo.com/tm-580-woox-travel
             <div class="col-12">
                 <nav class="main-nav">
                     <!-- ***** Logo Start ***** -->
-                    <!-- <a href="index.html" class="logo">
-                        <img src="assets/images/logo.png" alt="">
+                    <a href="index.html" class="logo">
+                        <img src="{% static 'assets/images/logo.png'%}" alt="">
                         
-                    </a> -->
+                    </a> 
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
@@ -112,25 +87,30 @@ https://templatemo.com/tm-580-woox-travel
       <div class="slider">
         <div id="top-banner-1" class="banner">
           <div class="banner-inner-wrapper header-text">
-            <div class="main-caption">
+            <div class="main-caption" style="top:50%">
               {% comment %} <h2>Take a Glimpse Into The Beautiful Country Of:</h2> {% endcomment %}
               <h1>{{centre.center_name}}</h1>
-              <div class="border-button"><a href="#">Add patient</a></div>
+              <div class="border-button"><a href="{% url 'Healthcenter:addpatient'%}">Add patient</a></div>
             </div>
-            <div class="container">
+            <div>
+              
+            </div>
+            <div class="container" style="position:relative;margin-top:750px;margin-left:50px">
               <div class="row">
                 <div class="col-lg-12">
                   <div class="more-info">
                     <div class="row">
-
                       <div class="col-lg-3 col-sm-6 col-6">
                         <i class="fa fa-user"></i>
-                        <h4><span>Effected People</span><br>44</h4>
+                        <h4><span>Total Patients</span><br>{{patient}}</h4>
                       </div>
-                      
                       <div class="col-lg-3 col-sm-6 col-6">
                         <i class="fa fa-user"></i>
-                        <h4><span>Cured People</span><br>275</h4>
+                        <h4><span>Effected Patients</span><br>{{admitted}}</h4>
+                      </div>
+                      <div class="col-lg-3 col-sm-6 col-6">
+                        <i class="fa fa-user"></i>
+                        <h4><span>Cured Patients</span><br>{{discharged}}</h4>
                       </div>
                       
                       <!-- <div class="col-lg-3 col-sm-6 col-6">
@@ -144,122 +124,16 @@ https://templatemo.com/tm-580-woox-travel
                 </div>
               </div>
             </div>
-            
           </div>
         </div>
-        <div id="top-banner-2" class="banner">
-          <div class="banner-inner-wrapper header-text">
-            <div class="main-caption">
-              <h2>Take a Glimpse Into The Beautiful Country Of:</h2>
-              <h1>Switzerland</h1>
-              <div class="border-button"><a href="about.html">Go There</a></div>
-            </div>
-            <div class="container">
-              <div class="row">
-                <div class="col-lg-12">
-                  <div class="more-info">
-                    <div class="row">
-                        <div class="col-lg-3 col-sm-6 col-6">
-                            <i class="fa fa-user"></i>
-                            <h4><span>Effected People</span><br>44</h4>
-                        </div>
-                          
-                        <div class="col-lg-3 col-sm-6 col-6">
-                            <i class="fa fa-user"></i>
-                            <h4><span>Cured People</span><br>275</h4>
-                        </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div id="top-banner-3" class="banner">
-          <div class="banner-inner-wrapper header-text">
-            <div class="main-caption">
-              <h2>Take a Glimpse Into The Beautiful Country Of:</h2>
-              <h1>France</h1>
-              <div class="border-button"><a href="about.html">Go There</a></div>
-            </div>
-            <div class="container">
-              <div class="row">
-                <div class="col-lg-12">
-                  <div class="more-info">
-                    <div class="row">
-                        <div class="col-lg-3 col-sm-6 col-6">
-                            <i class="fa fa-user"></i>
-                            <h4><span>Effected People</span><br>44</h4>
-                          </div>
-                          
-                          <div class="col-lg-3 col-sm-6 col-6">
-                            <i class="fa fa-user"></i>
-                            <h4><span>Cured People</span><br>275</h4>
-                          </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div id="top-banner-4" class="banner">
-          <div class="banner-inner-wrapper header-text">
-            <div class="main-caption">
-              <h2>Take a Glimpse Into The Beautiful Country Of:</h2>
-              <h1>Thailand</h1>
-              <div class="border-button"><a href="about.html">Go There</a></div>
-            </div>
-            <div class="container">
-              <div class="row">
-                <div class="col-lg-12">
-                  <div class="more-info">
-                    <div class="row">
-                        <div class="col-lg-3 col-sm-6 col-6">
-                            <i class="fa fa-user"></i>
-                            <h4><span>Effected People</span><br>44</h4>
-                          </div>
-                          
-                          <div class="col-lg-3 col-sm-6 col-6">
-                            <i class="fa fa-user"></i>
-                            <h4><span>Cured People</span><br>275</h4>
-                          </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      
     </div>
   </section>
-  <!-- ***** Main Banner Area End ***** -->
 
-  <div class="call-to-action">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8">
-          <h2>Are You Looking To Travel ?</h2>
-          <h4>Make A Reservation By Clicking The Button</h4>
-        </div>
-        <div class="col-lg-4">
-          <div class="border-button">
-            <a href="reservation.html">Book Yours Now</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <footer>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <p>Copyright © 2036 <a href="#">WoOx Travel</a> Company. All rights reserved. 
-          <br>Design: <a href="https://templatemo.com" target="_blank" title="free CSS templates">TemplateMo</a> Distribution: <a href="https://themewagon.com" target="_blank" >ThemeWagon</a></p>
+  <footer >
+    <div class="container" >
+      <div class="row" >
+        <div class="col-lg-12" >
+          <p>Copyright © 2036 <a href="#">SafeTrack</a> Company. All rights reserved. 
         </div>
       </div>
     </div>

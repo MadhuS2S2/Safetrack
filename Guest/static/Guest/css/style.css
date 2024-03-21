@@ -321,7 +321,7 @@ button {
      width: 100%;
      z-index: 9999999;
      height: 87px;
-     background:#ed242e;
+     background:#111F38;
 }
 
 
@@ -372,10 +372,10 @@ button {
 }
 
 .site-navbar ul li a:hover {
-    color: #00132b;
+    color: #a4cbfa;
 }
 .site-navbar ul li a.active {
-    color: #00132b;
+    color: #fe6f6f;
 }
 
 /* navbar regular css end */
@@ -488,13 +488,13 @@ button {
 /** banner section **/
 
 .full_bg {
-     background: url(../images/banner.png);
-     background-size: cover;
-     background-position: center;
-     background-repeat: no-repeat;
-     height: 100vh;
+    background: url(../images/banner.png);
+    background-size: contain;
+    background-position: right;
+    background-repeat: no-repeat;
+    height: 100vh;
     padding-bottom: 150px;
-     position: relative;
+    position: relative;
 }
 
 .full_bg .carousel-indicators {
@@ -552,18 +552,17 @@ button {
      padding: 0;
      font-size: 89px;
      line-height: 90px;
-     color: #fff;
+     color: #ff6464;
      font-weight: bold;
      text-align: left;
      padding-bottom: 70px;
 }
 
-
 .photog .read_more {
     margin-right: 15px;
     font-weight: normal;
-    background:#fff;
-    color: #000;
+    background:#111F38;
+    color: #ffffff;
     height: 50px;
     line-height: 50px;
     max-width: 204px;
@@ -1102,21 +1101,23 @@ ul.menu_footer {
     margin-bottom: 15px;
 }
 
+/* .menu_footer {
+    display: flex;
+    justify-content: center;
+} */
+
 ul.menu_footer li a {
     color: #979793;
     font-size: 17px;
     line-height: 18px;
     padding-bottom: 10px;
-    display: block;
+    
+    /* display: block; */
 }
 
 ul.menu_footer li a:hover {
     color: #e92f0b;
 }
-
-
-
-
 
 ul.inst li {
     display: inline-block;

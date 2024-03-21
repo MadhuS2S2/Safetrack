@@ -56,8 +56,13 @@ def change_password(request):
         return render(request,'Healthcenter/ChangePassword.html')
     
 def home_page(request):
-    centre=tbl_healthcenter.objects.get(id=request.session['cid'])
-    return render(request,'Healthcenter/Homepage.html',{'centre':centre})
+        centre=tbl_healthcenter.objects.get(id=request.session['cid'])
+        warddata=centre.center_ward
+        patient=tbl_patient.objects.all().count()
+        admitted=tbl_patient.objects.filter(patient_ward=warddata.id,patient_vstatus=0).count()
+        discharged=tbl_patient.objects.filter(patient_ward=warddata.id,patient_vstatus=1).count()
+        print(discharged)
+        return render(request,'Healthcenter/Homepage.html',{'centre':centre,'patient':patient,'discharged':discharged,'admitted':admitted})
 
 
 def addpatient(request):
@@ -160,4 +165,5 @@ def PatientcountReport(request):
         warddata=center.center_ward
         patient=tbl_patient.objects.filter(patient_ward=warddata.id,patient_vstatus=0).count()
         discharged=tbl_patient.objects.filter(patient_ward=warddata.id,patient_vstatus=1).count()
-        return render(request,'Healthcenter/PatientCountReport.html',{'data':patient,'discharged':discharged})
+        print(discharged)
+        return render(request,'Healthcenter/PatientCountReport.html',{'patient':patient,'discharged':discharged})

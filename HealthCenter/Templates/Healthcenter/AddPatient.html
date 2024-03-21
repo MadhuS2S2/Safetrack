@@ -30,15 +30,14 @@
                 <div class="col-12">
                     <nav class="main-nav">
                         <!-- ***** Logo Start ***** -->
-                        <!-- <a href="index.html" class="logo">
-                            <img src="assets/images/logo.png" alt="">
-                            
-                        </a> -->
+                        <a href="index.html" class="logo" style="margin-left:-5px">
+                            <img src="{% static 'assets/images/logo.png'%}" alt="">   
+                        </a> 
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
-                        <ul class="nav">
-                            <li><a href="{% url 'Healthcenter:homepage'%}" class="active">Home</a></li>
-                            <li><a href="{% url 'Healthcenter:addpatient'%}">Add Patient</a></li>
+                        <ul class="nav" style="margin-left:-50px">
+                            <li><a href="{% url 'Healthcenter:homepage'%}" >Home</a></li>
+                            <li><a href="{% url 'Healthcenter:addpatient'%}" class="active">Add Patient</a></li>
                             <li><a href="{% url 'Healthcenter:addmedicines'%}">Add Medicines</a></li>
                             <li><a href="{% url 'Healthcenter:requestlist'%}">View Medicine Requests</a></li>
                             <li><a href="{% url 'Healthcenter:centreprofile'%}"> <i class="fa fa-user"></i></a></li>
@@ -53,7 +52,9 @@
             </div>
         </div>
       </header>
-    <div class="container " style="margin-top:150px">
+
+      <div style='background-color:white;margin-top:150px'>
+    <div class="container ">
         <div class="row py-5 mt-4 align-items-center">
     <form action="#" method="post">
         {% csrf_token %}
@@ -153,6 +154,8 @@
         </div>
     </form>
 </div>
+</div>
+
 </div>
 </div>
 </body>

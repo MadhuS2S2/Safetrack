@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{% comment %} <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -39,4 +39,98 @@
     </table>
 </form>
 </body>
-</html>
+</html> {% endcomment %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodingDung | Profile Template</title>
+    <link rel="stylesheet" href="{% static 'style.css'%}">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container light-style flex-grow-1 container-p-y">
+        
+        <h4 class="font-weight-bold py-3 mb-4">
+            <a href="{% url 'kitchencenter:homepage'%}">Back</a> 
+           Edit Profile 
+        </h4>
+        <div class="card overflow-hidden">
+            <div class="row no-gutters row-bordered row-border-light">
+                <div class="col-md-3 pt-0">
+                    <div class="list-group list-group-flush account-settings-links">
+                        <a class="list-group-item list-group-item-action " 
+                            href="{% url 'kitchencenter:kitchenprofile'%}">General</a>
+                        <a class="list-group-item list-group-item-action active" 
+                            href="{% url 'kitchencenter:kitchenedit'%}">edit Profile</a>
+                        <a class="list-group-item list-group-item-action" 
+                            href="{% url 'kitchencenter:changepassword'%}">Change password</a>
+                        <a class="list-group-item list-group-item-action" 
+                            href="#account-notifications">Notifications</a>
+                        <a class="list-group-item list-group-item-action" 
+                            href="{% url 'Guest:homepage'%}">Log Out</a>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="tab-content">
+                        <div class="tab-pane fade active show" id="account-general">
+                            <form action="" method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div class="card-body media align-items-center">
+                                    <img src="{{kitchen.kitchen_photo.url}}" alt
+                                        class="col-md-2 ">
+                                    <div class="media-body ml-8">
+                                        <label class="btn btn-outline-primary">
+                                            Upload new photo
+                                            <input type="file" name="photo" class="account-settings-fileinput">
+                                        </label>
+                                        <div class="text-light small mt-1">Allowed JPG, GIF or PNG. Max size of 800K</div>
+                                    </div> 
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label class="form-label">Username</label>
+                                        <input name="name" type="text" class="form-control mb-1" value="{{kitchen.kitchen_name}}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Address</label>
+                                        <input name="address" type="text" class="form-control" value="{{kitchen.kitchen_address}}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Ward</label>
+                                        <input name="ward" type="text" class="form-control" value="{{kitchen.kitchen_ward.ward_name}}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Contact</label>
+                                        <input name="phone" type="number" class="form-control" value="4879134644">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">E-mail</label>
+                                        <input name="email" type="text" class="form-control mb-1" value="{{kitchen.kitchen_email}}">
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <input type="Submit" class="btn btn-primary" value="Save Changes">&nbsp;
+                                    <input type="reset" class="btn btn-default" value="Cancel">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript">
+
+    </script>
+</body>
+
+</html> 

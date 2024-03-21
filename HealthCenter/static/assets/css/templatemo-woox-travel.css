@@ -806,7 +806,7 @@ Banner Style
 #section-1 .content-slider .slider .banner .banner-inner-wrapper .main-caption {
   position: absolute;
   width: 100%;
-  top: 40%;
+  top: 70%;
   transform: translateY(-50%);
 }
 #section-1 .content-slider .slider .banner .banner-inner-wrapper h2 {
